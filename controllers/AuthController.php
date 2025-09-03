@@ -1,4 +1,14 @@
+<?php
+require_once '../config/DATABASE.php';
+require_once '../models/usuarios.php';
 
+session_start();
+
+// Probar conexión
+$conn = Database::getConnection();
+
+
+?>
 
 
 

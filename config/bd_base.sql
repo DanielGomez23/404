@@ -1,42 +1,48 @@
 create DATABASE project_db-- Tabla de postulantes
-CREATE TABLE postulante (
+-- Tabla de postulantes
+-- Crear la base de datos si no existe
+CREATE DATABASE IF NOT EXISTS project_db;
+USE project_db;
+
+-- Tabla de postulantes
+CREATE TABLE IF NOT EXISTS postulante (
     cedula INT PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-    contrasena VARCHAR(255) NOT NULL, -- La contraseña se almacena encriptada, solo el usuario la conoce
+    contrasena VARCHAR(255) NOT NULL, -- Contraseña encriptada
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla de reclutadores
-CREATE TABLE reclutador (
+CREATE TABLE IF NOT EXISTS reclutador (
     cedula INT PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-    contrasena VARCHAR(255) NOT NULL, -- La contraseña se almacena encriptada, solo el usuario la conoce
+    contrasena VARCHAR(255) NOT NULL, -- Contraseña encriptada
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla de administradores
-CREATE TABLE administrador (
+CREATE TABLE IF NOT EXISTS administrador (
     cedula INT PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-    contrasena VARCHAR(255) NOT NULL, -- La contraseña se almacena encriptada, solo el usuario la conoce
+    contrasena VARCHAR(255) NOT NULL, -- Contraseña encriptada
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla de currículums (CVs) subidos por postulantes
-CREATE TABLE curriculums (
+-- Tabla de currículums subidos por postulantes
+CREATE TABLE IF NOT EXISTS curriculums (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_postulante INT NOT NULL,
-    archivo_cv TEXT NOT NULL, -- nombre o ruta del archivo
+    archivo_cv TEXT NOT NULL, -- Ruta o nombre del archivo
     descripcion TEXT,
     fecha_subida DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_postulante) REFERENCES postulante(cedula)
 );
 
 -- Tabla de ofertas de trabajo publicadas por reclutadores
-CREATE TABLE ofertas_trabajo (
+CREATE TABLE IF NOT EXISTS ofertas_trabajo (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_reclutador INT NOT NULL,
     titulo VARCHAR(150) NOT NULL,
@@ -47,8 +53,8 @@ CREATE TABLE ofertas_trabajo (
 );
 
 -- Tabla de postulaciones a las ofertas de trabajo
-CREATE TABLE postulaciones (
-    cedula INT PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS postulaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_postulante INT NOT NULL,
     id_oferta INT NOT NULL,
     fecha_postulacion DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -56,3 +62,4 @@ CREATE TABLE postulaciones (
     FOREIGN KEY (id_postulante) REFERENCES postulante(cedula),
     FOREIGN KEY (id_oferta) REFERENCES ofertas_trabajo(id)
 );
+
