@@ -16,9 +16,7 @@ class Database {
             // 🔹 Si ocurre un error al conectar, se detiene el script con un mensaje.
             if (self::$conn->connect_error) {
                 die("Error de conexión: " . self::$conn->connect_error);
-            } else {
-                echo "Conexión exitosa a la base de datos.<br>";
-            }
+            } 
         }
 
         // Si ya había una conexión abierta, simplemente la devuelve.
