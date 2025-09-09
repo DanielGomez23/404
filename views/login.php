@@ -81,7 +81,7 @@
                     </div>
                 </form>
 
-                <!-- Social Login -->
+                <!-- otras posibiliades de iniciar sesion -->
                 <div class="social-login">
                     <div class="social-divider">O inicia sesión con</div>
                     <div class="social-buttons">
@@ -101,12 +101,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Agregar funcionalidad adicional si es necesario
+       
         document.getElementById('rol').addEventListener('change', function() {
             console.log('Rol seleccionado:', this.value);
         });
 
-        // Opcional: Guardar el rol seleccionado en localStorage para mejor UX
+        // Guardar el rol seleccionado 
         const rolSelect = document.getElementById('rol');
         const savedRole = localStorage.getItem('selectedRole');
         if (savedRole) {

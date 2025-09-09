@@ -137,7 +137,7 @@
                     </button>
                 </form>
 
-                <!-- Social Login -->
+                <!-- Otras posibilidades de registro -->
                 <div class="social-login">
                     <div class="social-divider">O regístrate con</div>
                     <div class="social-buttons">
@@ -172,7 +172,7 @@
         // Actualizar placeholder del selector de rol
         document.querySelectorAll('input[name="rol"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
-                // Aquí puedes agregar lógica adicional si necesitas
+        
                 console.log('Rol seleccionado:', this.value);
             });
         });

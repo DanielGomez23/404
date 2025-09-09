@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../public/css/landing.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navegacion -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -46,7 +46,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Encabezado -->
     <section id="inicio" class="hero-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -67,7 +67,7 @@
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Caracteristicas -->
     <section id="empresas" class="features-section">
         <div class="container">
             <h2 class="section-title">¿Por qué elegir Antioquia-unida?</h2>
@@ -150,7 +150,7 @@
         </div>
     </section>
 
-<!-- Sección de imagen de fondo de pantalla completa -->
+<!-- Imagen de fondo de pantalla completa -->
 <section class="fullscreen-background-section d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
@@ -175,7 +175,6 @@
 <footer class="footer-section">
     
 
-    <!-- Main Footer -->
     <div class="footer-main">
         <div class="container">
             <div class="row">
@@ -262,7 +261,7 @@
         </div>
     </div>
 
-    <!-- Bottom Footer -->
+    <!-- parte inferior del Footer -->
     <div class="footer-bottom">
         <div class="container">
             <div class="row align-items-center">
@@ -282,7 +281,7 @@
         </div>
     </div>
 
-    <!-- Decorative elements -->
+    <!-- Circulos decorativos del footer -->
     <div class="footer-decoration">
         <div class="decoration-circle circle-1"></div>
         <div class="decoration-circle circle-2"></div>
@@ -292,10 +291,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialize Lucide icons
+        // Iconos de Lucide
         lucide.createIcons();
 
-        // Scroll animations
+        // Animaciones de scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -309,12 +308,12 @@
             });
         }, observerOptions);
 
-        // Observe all elements with animate-on-scroll class
+        // Observar elementos con animaciones
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
 
-        // Smooth scrolling for navigation links
+        // Movimiento suavizado
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();

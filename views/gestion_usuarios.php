@@ -28,7 +28,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Header -->
     <div class="header-section">
         <div class="container">
             <div class="header-content">
@@ -107,7 +107,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                                 style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)) !important;">
+                                                style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)) !important;">
                                                 <i class="fas fa-user text-white"></i>
                                             </div>
                                             <strong><?= htmlspecialchars($u['nombre']) ?></strong>
@@ -160,7 +160,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                                                         <i class="fas fa-id-card me-2"></i>Cédula
                                                     </label>
                                                     <input type="number" name="cedula" class="form-control" 
-                                                           value="<?= $u['cedula'] ?>" required>
+                                                        value="<?= $u['cedula'] ?>" required>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -168,7 +168,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                                                         <i class="fas fa-user me-2"></i>Nombre
                                                     </label>
                                                     <input type="text" name="nombre" class="form-control" 
-                                                           value="<?= $u['nombre'] ?>" required>
+                                                        value="<?= $u['nombre'] ?>" required>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -176,7 +176,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                                                         <i class="fas fa-envelope me-2"></i>Correo
                                                     </label>
                                                     <input type="email" name="correo" class="form-control" 
-                                                           value="<?= $u['email'] ?>" required>
+                                                        value="<?= $u['email'] ?>" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

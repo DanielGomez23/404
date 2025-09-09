@@ -40,7 +40,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section Admin -->
+    <!-- Encabezado Admin -->
     <section class="admin-hero">
         <div class="container">
             <div class="fade-in">
@@ -180,9 +180,7 @@
             });
         });
 
- 
-
-        // Actualizar estadísticas (simulado)
+        // Actualizar estadísticas (Puede servir para mostrar datos en tiempo real)
         function updateStats() {
             const statNumbers = document.querySelectorAll('.stat-number');
             statNumbers.forEach(stat => {

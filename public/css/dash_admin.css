@@ -70,7 +70,7 @@
             box-shadow: 0 8px 20px #c34b36;
         }
 
-        /* Hero Section Admin */
+        /* Encabezado Admin */
         .admin-hero {
             padding: 3rem 0;
             background-color: rgba(21, 92, 167, 0.95);
@@ -241,27 +241,7 @@
             color: white;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .admin-title {
-                font-size: 2rem;
-            }
-            
-            .admin-stats {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .admin-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .admin-card {
-                padding: 1.5rem;
-            }
-        }
+    
 
         /* Animaciones */
         @keyframes pulse {
@@ -285,7 +265,7 @@
             }
         }
 
-        /* Efectos especiales para admin */
+        /* Efectos especiales para el logo que dice "admin" */
         .admin-indicator {
             position: absolute;
             top: 1rem;

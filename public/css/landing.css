@@ -246,7 +246,7 @@
 .fullscreen-background-section {
     position: relative;
     height: 100vh;
-    background-image: url('../img/manos.jpg'); /* Cambia por la ruta de tu imagen */
+    background-image: url('../img/manos.jpg'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -257,7 +257,7 @@
     overflow: hidden;
 }
 
-/* Overlay para oscurecer la imagen y hacer que el texto resalte más */
+/* Oscurecer la imagen y hacer que el texto resalte más */
 .fullscreen-background-section::before {
     content: '';
     position: absolute;
@@ -265,7 +265,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4); /* Ajusta la opacidad según necesites */
+    background: rgba(0, 0, 0, 0.4); 
     z-index: 1;
 }
 
@@ -279,7 +279,7 @@
     padding: 0 20px;
 }
 
-/* Título principal superpuesto */
+/* Título principal */
 .overlay-title {
     font-size: 3.5rem;
     font-weight: 800;
@@ -289,7 +289,7 @@
     line-height: 1.1;
 }
 
-/* Subtítulo superpuesto */
+/* Subtítulo */
 .overlay-subtitle {
     font-size: 1.4rem;
     font-weight: 400;
@@ -299,7 +299,7 @@
     opacity: 0.95;
 }
 
-/* Botón superpuesto (opcional) */
+/* Botón */
 .overlay-btn {
     background: #ff6347;
     border: none;
@@ -334,14 +334,8 @@
     }
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-    .fullscreen-background-section {
-        background-attachment: scroll; /* Mejor rendimiento en móviles */
-    }
-}
 
-/* ==================== FOOTER STYLES ==================== */
+/* Footer */
 
 .footer-section {
     position: relative;
@@ -349,7 +343,6 @@
     overflow: hidden;
 }
 
-/* CTA Section */
 .footer-cta {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -381,7 +374,6 @@
     box-shadow: 0 12px 40px rgba(255, 99, 71, 0.4);
 }
 
-/* Main Footer */
 .footer-main {
     padding: 80px 0 40px;
     position: relative;
@@ -417,7 +409,6 @@
     margin-bottom: 2rem;
 }
 
-/* Social Links */
 .social-links {
     display: flex;
     gap: 15px;
@@ -465,7 +456,6 @@
     border-radius: 1px;
 }
 
-/* Footer Links */
 .footer-links {
     list-style: none;
     padding: 0;
@@ -506,7 +496,6 @@
     width: 12px;
 }
 
-/* Contact Info */
 .contact-info {
     padding: 0;
 }
@@ -524,7 +513,6 @@
     flex-shrink: 0;
 }
 
-/* Bottom Footer */
 .footer-bottom {
     background: rgba(0, 0, 0, 0.2);
     padding: 25px 0;
@@ -555,7 +543,6 @@
     color: #ff6347;
 }
 
-/* Decorative Elements */
 .footer-decoration {
     position: absolute;
     top: 0;
@@ -608,45 +595,4 @@
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .footer-cta {
-        padding: 40px 0;
-    }
-    
-    .cta-title {
-        font-size: 1.8rem;
-    }
-    
-    .footer-main {
-        padding: 60px 0 30px;
-    }
-    
-    .footer-bottom-links {
-        justify-content: center;
-        margin-top: 15px;
-        flex-wrap: wrap;
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
-    
-    .decoration-circle {
-        display: none; /* Ocultar decoraciones en móvil para mejor rendimiento */
-    }
-}
 
-@media (max-width: 576px) {
-    .cta-title {
-        font-size: 1.5rem;
-    }
-    
-    .brand-title {
-        font-size: 1.5rem;
-    }
-    
-    .footer-bottom-links {
-        gap: 15px;
-    }
-}
