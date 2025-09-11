@@ -143,54 +143,63 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                                 </tr>
 
                                 <!-- Modal editar -->
-                                <div class="modal fade" id="editarModal<?= $u['cedula'] ?>" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <form method="POST" action="../controllers/AuthController.php" class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">
-                                                    <i class="fas fa-user-edit me-2"></i>Editar Usuario
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="rol" value="<?= $u['rol'] ?>">
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">
-                                                        <i class="fas fa-id-card me-2"></i>Cédula
-                                                    </label>
-                                                    <input type="number" name="cedula" class="form-control" 
-                                                        value="<?= $u['cedula'] ?>" required>
-                                                </div>
+<div class="modal fade" id="editarModal<?= $u['cedula'] ?>" tabindex="-1" aria-labelledby="editarModalLabel<?= $u['cedula'] ?>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel<?= $u['cedula'] ?>">
+                    <i class="fas fa-user-edit me-2"></i>Editar Usuario
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">
-                                                        <i class="fas fa-user me-2"></i>Nombre
-                                                    </label>
-                                                    <input type="text" name="nombre" class="form-control" 
-                                                        value="<?= $u['nombre'] ?>" required>
-                                                </div>
+            <form method="POST" action="../controllers/AuthController.php">
+                <div class="modal-body">
+                    <!-- Rol oculto -->
+                    <input type="hidden" name="rol" value="<?= htmlspecialchars($u['rol']) ?>">
+                    <!-- Cedula original -->
+                    <input type="hidden" name="cedula_original" value="<?= htmlspecialchars($u['cedula']) ?>">
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">
-                                                        <i class="fas fa-envelope me-2"></i>Correo
-                                                    </label>
-                                                    <input type="email" name="correo" class="form-control" 
-                                                        value="<?= $u['email'] ?>" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    <i class="fas fa-times me-2"></i>Cancelar
-                                                </button>
-                                                <button type="submit" name="editar" class="btn btn-primary">
-                                                    <i class="fas fa-save me-2"></i>Guardar cambios
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
+                    <div class="mb-3">
+                        <label for="cedula<?= $u['cedula'] ?>" class="form-label">
+                            <i class="fas fa-id-card me-2"></i>Cédula
+                        </label>
+                        <input type="number" id="cedula<?= $u['cedula'] ?>" name="cedula" class="form-control" 
+                               value="<?= htmlspecialchars($u['cedula']) ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nombre<?= $u['cedula'] ?>" class="form-label">
+                            <i class="fas fa-user me-2"></i>Nombre
+                        </label>
+                        <input type="text" id="nombre<?= $u['cedula'] ?>" name="nombre" class="form-control" 
+                               value="<?= htmlspecialchars($u['nombre']) ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="correo<?= $u['cedula'] ?>" class="form-label">
+                            <i class="fas fa-envelope me-2"></i>Correo
+                        </label>
+                        <input type="email" id="correo<?= $u['cedula'] ?>" name="email" class="form-control" 
+                               value="<?= htmlspecialchars($u['email']) ?>" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Cancelar
+                    </button>
+                    <button type="submit" name="editar" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Guardar cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+                    <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
                                 <td colspan="5">

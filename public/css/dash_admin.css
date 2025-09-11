@@ -234,22 +234,8 @@
             display: inline-block;
         }
 
-        .card-action:hover {
-            background: linear-gradient(135deg, #357ABD 0%, #2E5A87 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
-            color: white;
-        }
 
     
-
-        /* Animaciones */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
         .fade-in {
             animation: fadeInUp 0.8s ease-out;
         }

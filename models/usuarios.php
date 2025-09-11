@@ -61,20 +61,31 @@ class Usuario {
         }
         return null;
     }
-    // Editar usuario
-    public function actualizarUsuario(string $rol, int $cedula, string $nombre, string $correo): bool {
-        $roles = ["postulante", "reclutador", "administrador"];
-        if (!in_array($rol, $roles)) {
-            return false;
-        }
-
-        $sql = "UPDATE $rol SET nombre = ?, email = ? WHERE cedula = ?";
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) return false;
-
-        $stmt->bind_param("ssi", $nombre, $correo, $cedula);
-        return $stmt->execute();
+public function actualizarUsuario(
+    string $rol,
+    int $cedula_original,
+    int $cedula,
+    string $nombre,
+    string $correo
+): bool {
+    $roles = ["postulante", "reclutador", "administrador"];
+    if (!in_array($rol, $roles)) {
+        return false;
     }
+
+    $sql = "UPDATE $rol 
+            SET cedula = ?, nombre = ?, email = ?
+            WHERE cedula = ?";
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) return false;
+
+    $stmt->bind_param("issi", $cedula, $nombre, $correo, $cedula_original);
+
+    return $stmt->execute();
+}
+
+
+
     // Eliminar usuario
     public function eliminarUsuario(string $rol, int $cedula): bool {
         $roles = ["postulante", "reclutador", "administrador"];

@@ -43,8 +43,8 @@
                             <i class="fas fa-user-tag"></i>
                             <select class="form-select" name="rol" id="rol" required>
                                 <option value="">Seleccione un rol</option>
-                                <option value="postulante">Postulante</option>
-                                <option value="reclutador">Reclutador</option>
+                                <option value="postulante">Profesional</option>
+                                <option value="reclutador">Empresa</option>
                                 <option value="administrador">Administrador</option>
                             </select>
                         </div>
@@ -65,8 +65,7 @@
                         <label for="contrasena" class="form-label">Contraseña</label>
                         <div class="input-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" class="form-control" name="contrasena" id="contrasena" 
-                                   placeholder="••••••••" required>
+                            <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="••••••••" required>
                         </div>
                     </div>
 

@@ -27,11 +27,7 @@
                         <a href="#" class="nav-link">Configuración</a>
                     </div>
                     
-                    <div class="user-info ms-3 me-3 text-white d-none d-md-block">
-                        <small>Bienvenido, Administrador</small>
-                    </div>
-                    
-                    <a href="logout.php" class="btn btn-logout">
+                    <a href="../logout.php" class="btn btn-logout">
                         <i class="fas fa-sign-out-alt me-1"></i>
                         Cerrar Sesión
                     </a>
@@ -58,7 +54,7 @@
                         <div class="stat-label">Usuarios Activos</div>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">89</span>
+                        <span class="stat-number">200</span>
                         <div class="stat-label">Empresas</div>
                     </div>
                     <div class="stat-item">
@@ -170,28 +166,5 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Animaciones de entrada
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.admin-card');
-            
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.2}s`;
-            });
-        });
-
-        // Actualizar estadísticas (Puede servir para mostrar datos en tiempo real)
-        function updateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const currentValue = parseInt(stat.textContent.replace(',', ''));
-                const increment = Math.floor(Math.random() * 5) + 1;
-                stat.textContent = (currentValue + increment).toLocaleString();
-            });
-        }
-
-        // Actualizar estadísticas cada 30 segundos
-        setInterval(updateStats, 30000);
-    </script>
 </body>
 </html>

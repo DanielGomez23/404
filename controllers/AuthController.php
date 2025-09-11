@@ -59,20 +59,47 @@ class AuthController {
         }
     }
     // Editar usuario
-    public function editarUsuario() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar'])) {
-            $rol = trim($_POST['rol'] ?? '');
-            $cedula = intval($_POST['cedula'] ?? 0);
-            $nombre = trim($_POST['nombre'] ?? '');
-            $correo = trim($_POST['correo'] ?? '');
+   // Editar usuario
+// Editar usuario
+// Editar usuario
+// Editar usuario
+public function editarUsuario() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar'])) {
+        $rol = trim($_POST['rol'] ?? '');
+        $cedula_original = intval($_POST['cedula_original'] ?? 0); // Para buscar el usuario original
+        $cedula = intval($_POST['cedula'] ?? 0);
+        $nombre = trim($_POST['nombre'] ?? '');
+        $correo = trim($_POST['email'] ?? ''); // debe coincidir con el formulario
 
-            if ($this->usuario->actualizarUsuario($rol, $cedula, $nombre, $correo)) {
-                $this->mostrarAlerta('success', 'Usuario actualizado', 'El usuario fue actualizado correctamente.', '../views/admin_dashboard.php');
-            } else {
-                $this->mostrarAlerta('error', 'Error', 'No se pudo actualizar el usuario.', '../views/admin_dashboard.php');
-            }
+        $actualizado = $this->usuario->actualizarUsuario(
+            $rol,
+            $cedula_original,
+            $cedula,
+            $nombre,
+            $correo
+        );
+
+        if ($actualizado) {
+            $this->mostrarAlerta(
+                'success',
+                'Usuario actualizado',
+                'El usuario fue actualizado correctamente.',
+                '../views/gestion_usuarios.php'
+            );
+        } else {
+            $this->mostrarAlerta(
+                'error',
+                'Error',
+                'No se pudo actualizar el usuario.',
+                '../views/gestion_usuarios.php'
+            );
         }
     }
+}
+
+
+
+
     // Eliminar usuario
     public function eliminarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
@@ -80,7 +107,7 @@ class AuthController {
             $cedula = intval($_POST['cedula'] ?? 0);
 
             if ($this->usuario->eliminarUsuario($rol, $cedula)) {
-                $this->mostrarAlerta('success', 'Usuario eliminado', 'El usuario fue eliminado correctamente.', '../views/admin_dashboard.php');
+                $this->mostrarAlerta('success', 'Usuario eliminado', 'El usuario fue eliminado correctamente.', '../views/gestion_usuarios.php');
             } else {
                 $this->mostrarAlerta('error', 'Error', 'No se pudo eliminar el usuario.', '../views/admin_dashboard.php');
             }
