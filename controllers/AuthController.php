@@ -11,6 +11,7 @@ class AuthController {
 
     public function __construct(mysqli $conn) {
         $this->usuario = new Usuario($conn);
+        $this->alerta = new Alerta();
     }
     // Registrar usuario
     public function registrarUsuario() {

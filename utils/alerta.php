@@ -1,6 +1,5 @@
 <?php
 require_once '../config/Database.php';
-session_start();
 
 class Alerta{
 public function mostrarAlerta($icono, $titulo, $mensaje, $redireccion) {
