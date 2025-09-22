@@ -1,10 +1,13 @@
 <?php
 require_once '../config/Database.php';
 require_once '../models/Usuarios.php';
+require_once '../utils/alerta.php';
 session_start();
 
 class AuthController {
     private Usuario $usuario;
+    private Alerta $alerta;
+
 
     public function __construct(mysqli $conn) {
         $this->usuario = new Usuario($conn);
@@ -19,13 +22,13 @@ class AuthController {
             $rol = trim($_POST['rol'] ?? '');
 
             if (!$cedula || !$nombre || !$correo || !$contrasena || !$rol) {
-                $this->mostrarAlerta('warning', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/registro.php');
+                $this->alerta->mostrarAlerta('warning', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/registro.php');
             }
 
             if ($this->usuario->registrar($rol, $cedula, $nombre, $correo, $contrasena)) {
-                $this->mostrarAlerta('success', 'Registro exitoso', 'Tu cuenta fue creada con éxito.', '../views/login.php');
+                $this->alerta->mostrarAlerta('success', 'Registro exitoso', 'Tu cuenta fue creada con éxito.', '../views/login.php');
             } else {
-                $this->mostrarAlerta('error', 'Error', 'No se pudo registrar. Verifica los datos.', '../views/registro.php');
+                $this->alerta->mostrarAlerta('error', 'Error', 'No se pudo registrar. Verifica los datos.', '../views/registro.php');
             }
         }
     }
@@ -37,7 +40,7 @@ class AuthController {
             $contrasena = trim($_POST['contrasena'] ?? '');
 
             if (!$rol || !$correo || !$contrasena) {
-                $this->mostrarAlerta('warning', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/login.php');
+                $this->alerta->mostrarAlerta('warning', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/login.php');
             }
 
             $usuario = $this->usuario->iniciarSesion($rol, $correo, $contrasena);
@@ -49,19 +52,16 @@ class AuthController {
 
                 // Redirige el rol
                 if ($usuario['rol'] === 'administrador') {
-                    $this->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al panel de administrador.", '../views/dash/dash_admin.php');
+                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al panel de administrador.", '../views/dash/dash_admin.php');
                 } else {
-                    $this->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al sistema.", '../views/dashboard.php');
+                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al sistema.", '../views/dashboard.php');
                 }
             } else {
-                $this->mostrarAlerta('error', 'Error de autenticación', 'Credenciales incorrectas.', '../views/login.php');
+                $this->alerta->mostrarAlerta('error', 'Error de autenticación', 'Credenciales incorrectas.', '../views/login.php');
             }
         }
     }
-    // Editar usuario
-   // Editar usuario
-// Editar usuario
-// Editar usuario
+
 // Editar usuario
 public function editarUsuario() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar'])) {
@@ -80,14 +80,14 @@ public function editarUsuario() {
         );
 
         if ($actualizado) {
-            $this->mostrarAlerta(
+            $this->alerta->mostrarAlerta(
                 'success',
                 'Usuario actualizado',
                 'El usuario fue actualizado correctamente.',
                 '../views/gestion_usuarios.php'
             );
         } else {
-            $this->mostrarAlerta(
+            $this->alerta->mostrarAlerta(
                 'error',
                 'Error',
                 'No se pudo actualizar el usuario.',
@@ -98,38 +98,18 @@ public function editarUsuario() {
 }
 
 
-
-
-    // Eliminar usuario
+// Eliminar usuario
     public function eliminarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
             $rol = trim($_POST['rol'] ?? '');
             $cedula = intval($_POST['cedula'] ?? 0);
 
             if ($this->usuario->eliminarUsuario($rol, $cedula)) {
-                $this->mostrarAlerta('success', 'Usuario eliminado', 'El usuario fue eliminado correctamente.', '../views/gestion_usuarios.php');
+                $this->alerta->mostrarAlerta('success', 'Usuario eliminado', 'El usuario fue eliminado correctamente.', '../views/gestion_usuarios.php');
             } else {
-                $this->mostrarAlerta('error', 'Error', 'No se pudo eliminar el usuario.', '../views/admin_dashboard.php');
+                $this->alerta->mostrarAlerta('error', 'Error', 'No se pudo eliminar el usuario.', '../views/admin_dashboard.php');
             }
         }
-    }
-    private function mostrarAlerta($icono, $titulo, $mensaje, $redireccion) {
-        echo "
-        <html><head>
-        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-        </head><body>
-        <script>
-            Swal.fire({
-                icon: '$icono',
-                title: '$titulo',
-                text: '$mensaje',
-                confirmButtonText: 'Aceptar'
-            }).then(() => {
-                window.location.href = '$redireccion';
-            });
-        </script>
-        </body></html>";
-        exit;
     }
 }
 // Conexión
