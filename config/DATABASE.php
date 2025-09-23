@@ -11,7 +11,7 @@ class Database {
         // Si aún no existe una conexión, se crea una nueva.
         // Esto asegura que usemos siempre la misma conexión (patrón Singleton).
         if (self::$conn === null) {
-            self::$conn = new mysqli("localhost", "root", "root", "project_db");
+            self::$conn = new mysqli("localhost", "root", "", "project_db");
 
             // 🔹 Si ocurre un error al conectar, se detiene el script con un mensaje.
             if (self::$conn->connect_error) {
