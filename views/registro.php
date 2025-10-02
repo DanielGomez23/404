@@ -168,14 +168,6 @@
                 this.setCustomValidity('');
             }
         });
-
-        // Actualizar placeholder del selector de rol
-        document.querySelectorAll('input[name="rol"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-        
-                console.log('Rol seleccionado:', this.value);
-            });
-        });
     </script>
 </body>
 </html>

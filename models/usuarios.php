@@ -61,13 +61,7 @@ class Usuario {
         }
         return null;
     }
-public function actualizarUsuario(
-    string $rol,
-    int $cedula_original,
-    int $cedula,
-    string $nombre,
-    string $correo
-): bool {
+public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,string $nombre,string $correo): bool {
     $roles = ["postulante", "reclutador", "administrador"];
     if (!in_array($rol, $roles)) {
         return false;

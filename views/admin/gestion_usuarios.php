@@ -37,6 +37,10 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                     <p class="mb-0 opacity-75">Gestión de usuarios - Antioquia Unida</p>
                 </div>
                 <div class="user-info">
+                    <button onclick="history.back()" class="btn-back">
+                        <i class="fas fa-arrow-left me-2"></i>Volver
+                    </button>
+                    
                     <div class="user-badge">
                         <i class="fas fa-user-shield me-2"></i>
                         <?= htmlspecialchars($_SESSION['usuario_nombre']) ?>

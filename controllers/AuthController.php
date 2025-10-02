@@ -53,9 +53,9 @@ class AuthController {
 
                 // Redirige el rol
                 if ($usuario['rol'] === 'administrador') {
-                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al panel de administrador.", '../views/dash/dash_admin.php');
+                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al panel de administrador.", '../views/admin/dash_admin.php');
                 } else {
-                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al sistema.", '../views/dashboard.php');
+                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al sistema.", '../views/empresas/dash_reclutadores.php');
                 }
             } else {
                 $this->alerta->mostrarAlerta('error', 'Error de autenticación', 'Credenciales incorrectas.', '../views/login.php');

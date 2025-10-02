@@ -75,7 +75,7 @@
             
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
-                    <div class="feature-card floating">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i data-lucide="users"></i>
                         </div>
@@ -87,7 +87,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
-                    <div class="feature-card floating" style="animation-delay: 0.5s;">
+                    <div class="feature-card" style="animation-delay: 0.5s;">
                         <div class="feature-icon">
                             <i data-lucide="building-2"></i>
                         </div>
@@ -99,7 +99,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
-                    <div class="feature-card floating" style="animation-delay: 1s;">
+                    <div class="feature-card" style="animation-delay: 1s;">
                         <div class="feature-icon">
                             <i data-lucide="user-check"></i>
                         </div>
@@ -113,7 +113,7 @@
             
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
-                    <div class="feature-card floating" style="animation-delay: 1.5s;">
+                    <div class="feature-card" style="animation-delay: 1.5s;">
                         <div class="feature-icon">
                             <i data-lucide="link"></i>
                         </div>
@@ -125,7 +125,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
-                    <div class="feature-card floating" style="animation-delay: 2s;">
+                    <div class="feature-card" style="animation-delay: 2s;">
                         <div class="feature-icon">
                             <i data-lucide="message-circle"></i>
                         </div>
@@ -137,7 +137,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6 mb-4 animate-on-scroll">
-                    <div class="feature-card floating" style="animation-delay: 2.5s;">
+                    <div class="feature-card " style="animation-delay: 2.5s;">
                         <div class="feature-icon">
                             <i data-lucide="trending-up"></i>
                         </div>
@@ -312,20 +312,6 @@
         // Observar elementos con animaciones
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
-        });
-
-        // Movimiento suavizado
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
         });
 
     </script>
