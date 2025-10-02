@@ -81,7 +81,7 @@
                     <p class="card-description">
                         Administra todos los usuarios de la plataforma, postulantes, reclutadores y sus permisos.
                     </p>
-                    <a href="../gestion_usuarios.php" class="card-action">
+                    <a href="gestion_usuarios.php" class="card-action">
                         <i class="fas fa-user-cog me-2"></i>
                         Gestionar Usuarios
                     </a>
