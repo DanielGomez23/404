@@ -8,11 +8,11 @@ class AuthController {
     private Usuario $usuario;
     private Alerta $alerta;
 
-
     public function __construct(mysqli $conn) {
         $this->usuario = new Usuario($conn);
         $this->alerta = new Alerta();
     }
+
     // Registrar usuario
     public function registrarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar'])) {
@@ -23,16 +23,32 @@ class AuthController {
             $rol = trim($_POST['rol'] ?? '');
 
             if (!$cedula || !$nombre || !$correo || !$contrasena || !$rol) {
-                $this->alerta->mostrarAlerta('warning', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/registro.php');
+                $this->alerta->mostrarAlerta(
+                    'warning',
+                    'Campos obligatorios',
+                    'Todos los campos son obligatorios.',
+                    '../views/registro.php'
+                );
             }
 
             if ($this->usuario->registrar($rol, $cedula, $nombre, $correo, $contrasena)) {
-                $this->alerta->mostrarAlerta('success', 'Registro exitoso', 'Tu cuenta fue creada con éxito.', '../views/login.php');
+                $this->alerta->mostrarAlerta(
+                    'success',
+                    'Registro exitoso',
+                    'Tu cuenta fue creada con éxito.',
+                    '../views/login.php'
+                );
             } else {
-                $this->alerta->mostrarAlerta('error', 'Error', 'No se pudo registrar. Verifica los datos.', '../views/registro.php');
+                $this->alerta->mostrarAlerta(
+                    'error',
+                    'Error',
+                    'No se pudo registrar. Verifica los datos.',
+                    '../views/registro.php'
+                );
             }
         }
     }
+
     // Iniciar sesión
     public function iniciarSesion() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
@@ -41,7 +57,12 @@ class AuthController {
             $contrasena = trim($_POST['contrasena'] ?? '');
 
             if (!$rol || !$correo || !$contrasena) {
-                $this->alerta->mostrarAlerta('warning', 'Campos obligatorios', 'Todos los campos son obligatorios.', '../views/login.php');
+                $this->alerta->mostrarAlerta(
+                    'warning',
+                    'Campos obligatorios',
+                    'Todos los campos son obligatorios.',
+                    '../views/login.php'
+                );
             }
 
             $usuario = $this->usuario->iniciarSesion($rol, $correo, $contrasena);
@@ -51,68 +72,115 @@ class AuthController {
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_rol'] = $usuario['rol'];
 
-                // Redirige el rol
-                if ($usuario['rol'] === 'administrador') {
-                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al panel de administrador.", '../views/admin/dash_admin.php');
-                } else {
-                    $this->alerta->mostrarAlerta('success', 'Bienvenido', "Hola {$usuario['nombre']}, bienvenido al sistema.", '../views/dashboard.php');
+                // 🔹 Redirigir según el rol
+                switch ($usuario['rol']) {
+                    case 'superadmin':
+                        $this->alerta->mostrarAlerta(
+                            'success',
+                            'Bienvenido SuperAdmin',
+                            "Hola {$usuario['nombre']}, bienvenido al panel de SuperAdministrador.",
+                            '../views/superadmin/dash_superadmin.php'
+                        );
+                        break;
+
+                    case 'administrador':
+                        $this->alerta->mostrarAlerta(
+                            'success',
+                            'Bienvenido Administrador',
+                            "Hola {$usuario['nombre']}, bienvenido al panel de administrador.",
+                            '../views/admin/dash_admin.php'
+                        );
+                        break;
+
+                    case 'reclutador':
+                        $this->alerta->mostrarAlerta(
+                            'success',
+                            'Bienvenido Reclutador',
+                            "Hola {$usuario['nombre']}, bienvenido a la gestión de postulaciones.",
+                            '../views/admin/gestion_postulantes.php'
+                        );
+                        break;
+
+                    default:
+                        $this->alerta->mostrarAlerta(
+                            'success',
+                            'Bienvenido',
+                            "Hola {$usuario['nombre']}, bienvenido al sistema.",
+                            '../views/dashboard.php'
+                        );
+                        break;
                 }
             } else {
-                $this->alerta->mostrarAlerta('error', 'Error de autenticación', 'Credenciales incorrectas.', '../views/login.php');
+                $this->alerta->mostrarAlerta(
+                    'error',
+                    'Error de autenticación',
+                    'Credenciales incorrectas.',
+                    '../views/login.php'
+                );
             }
         }
     }
 
-// Editar usuario
-public function editarUsuario() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar'])) {
-        $rol = trim($_POST['rol'] ?? '');
-        $cedula_original = intval($_POST['cedula_original'] ?? 0); // Para buscar el usuario original
-        $cedula = intval($_POST['cedula'] ?? 0);
-        $nombre = trim($_POST['nombre'] ?? '');
-        $correo = trim($_POST['email'] ?? ''); // debe coincidir con el formulario
+    // Editar usuario
+    public function editarUsuario() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar'])) {
+            $rol = trim($_POST['rol'] ?? '');
+            $cedula_original = intval($_POST['cedula_original'] ?? 0);
+            $cedula = intval($_POST['cedula'] ?? 0);
+            $nombre = trim($_POST['nombre'] ?? '');
+            $correo = trim($_POST['email'] ?? '');
 
-        $actualizado = $this->usuario->actualizarUsuario(
-            $rol,
-            $cedula_original,
-            $cedula,
-            $nombre,
-            $correo
-        );
+            $actualizado = $this->usuario->actualizarUsuario(
+                $rol,
+                $cedula_original,
+                $cedula,
+                $nombre,
+                $correo
+            );
 
-        if ($actualizado) {
-            $this->alerta->mostrarAlerta(
-                'success',
-                'Usuario actualizado',
-                'El usuario fue actualizado correctamente.',
-                '../views/gestion_usuarios.php'
-            );
-        } else {
-            $this->alerta->mostrarAlerta(
-                'error',
-                'Error',
-                'No se pudo actualizar el usuario.',
-                '../views/gestion_usuarios.php'
-            );
+            if ($actualizado) {
+                $this->alerta->mostrarAlerta(
+                    'success',
+                    'Usuario actualizado',
+                    'El usuario fue actualizado correctamente.',
+                    '../views/gestion_usuarios.php'
+                );
+            } else {
+                $this->alerta->mostrarAlerta(
+                    'error',
+                    'Error',
+                    'No se pudo actualizar el usuario.',
+                    '../views/gestion_usuarios.php'
+                );
+            }
         }
     }
-}
 
-
-// Eliminar usuario
+    // Eliminar usuario
     public function eliminarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
             $rol = trim($_POST['rol'] ?? '');
             $cedula = intval($_POST['cedula'] ?? 0);
 
             if ($this->usuario->eliminarUsuario($rol, $cedula)) {
-                $this->alerta->mostrarAlerta('success', 'Usuario eliminado', 'El usuario fue eliminado correctamente.', '../views/gestion_usuarios.php');
+                $this->alerta->mostrarAlerta(
+                    'success',
+                    'Usuario eliminado',
+                    'El usuario fue eliminado correctamente.',
+                    '../views/gestion_usuarios.php'
+                );
             } else {
-                $this->alerta->mostrarAlerta('error', 'Error', 'No se pudo eliminar el usuario.', '../views/admin_dashboard.php');
+                $this->alerta->mostrarAlerta(
+                    'error',
+                    'Error',
+                    'No se pudo eliminar el usuario.',
+                    '../views/admin_dashboard.php'
+                );
             }
         }
     }
 }
+
 // Conexión
 $conn = Database::getConnection();
 

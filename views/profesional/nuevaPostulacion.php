@@ -59,7 +59,7 @@ require_once "../../config/DATABASE.php";
     <div class="container">
         <h2>Formulario de Postulación</h2>
 
-        <!-- ✅ Conexión directa al controlador -->
+        <!-- Conexión directa al controlador -->
         <form action="../../controllers/postulacionController.php" method="POST" enctype="multipart/form-data">
             <label>Nombre completo:</label>
             <input type="text" name="nombre" required>

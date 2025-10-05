@@ -63,7 +63,7 @@ class PostulacionController {
                     VALUES ('$nombre', '$correo', '$telefono', '$ruta_relativa', '$mensaje', NOW())";
 
             if (mysqli_query($conn, $sql)) {
-                echo "<script>alert('✅ Postulación enviada correctamente.'); window.location.href='../views/landing.php';</script>";
+                echo "<script>alert('Postulación enviada correctamente.'); window.location.href='../views/landing.php';</script>";
                 exit;
             } else {
                 // Si falla, eliminar el archivo subido
