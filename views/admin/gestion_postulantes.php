@@ -123,7 +123,7 @@ $total_pages = ceil($total / $limit);
                                 <td><?= htmlspecialchars($p['correo']) ?></td>
                                 <td><?= htmlspecialchars($p['telefono']) ?></td>
                                 <td>
-                                    <a href="../../<?= htmlspecialchars($p['cv']) ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <a href="../../<?= htmlspecialchars($p['cv']) ?>" download class="btn btn-sm btn-outline-primary">
                                         <i class="fas fa-eye me-1"></i>Ver PDF
                                     </a>
                                 </td>
@@ -150,7 +150,7 @@ $total_pages = ceil($total / $limit);
                                             <p><strong>Teléfono:</strong> <?= htmlspecialchars($p['telefono']) ?></p>
                                             <p><strong>Mensaje:</strong> <?= nl2br(htmlspecialchars($p['mensaje'])) ?></p>
                                             <p><strong>Fecha de postulación:</strong> <?= date("d/m/Y H:i", strtotime($p['fecha_postulacion'])) ?></p>
-                                            <a href="../../<?= htmlspecialchars($p['cv']) ?>" target="_blank" class="btn btn-primary">
+                                            <a href="../../<?= htmlspecialchars($p['cv']) ?>" download class="btn btn-primary">
                                                 <i class="fas fa-file-pdf me-2"></i>Ver hoja de vida
                                             </a>
                                         </div>

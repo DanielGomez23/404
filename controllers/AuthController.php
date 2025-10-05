@@ -74,14 +74,6 @@ class AuthController {
 
                 // 🔹 Redirigir según el rol
                 switch ($usuario['rol']) {
-                    case 'superadmin':
-                        $this->alerta->mostrarAlerta(
-                            'success',
-                            'Bienvenido SuperAdmin',
-                            "Hola {$usuario['nombre']}, bienvenido al panel de SuperAdministrador.",
-                            '../views/superadmin/dash_superadmin.php'
-                        );
-                        break;
 
                     case 'administrador':
                         $this->alerta->mostrarAlerta(
@@ -100,6 +92,15 @@ class AuthController {
                             '../views/admin/gestion_postulantes.php'
                         );
                         break;
+
+                        case 'postulante':
+                            $this->alerta->mostrarAlerta(
+                                'success',
+                                'Bienvenido Profesional',
+                                "Hola {$usuario['nombre']}, siéntete libre de postularte.",
+                                '../views/profesional/nuevaPostulacion.php'
+                            );
+                            break;
 
                     default:
                         $this->alerta->mostrarAlerta(
