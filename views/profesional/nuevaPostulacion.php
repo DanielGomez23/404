@@ -1,6 +1,8 @@
 <?php
+require_once '../../config/Database.php';
+require_once '../../models/Usuarios.php';
 session_start();
-require_once "../../config/DATABASE.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
