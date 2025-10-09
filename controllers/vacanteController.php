@@ -81,6 +81,13 @@ class VacanteController {
             }
         }
     }
+
+    public function listarVacantes() {
+        return $this->vacante->obtenerVacantes();
+    }
+
+
+
 }
 
 //Conexión
