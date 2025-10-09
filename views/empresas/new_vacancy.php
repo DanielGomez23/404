@@ -89,7 +89,8 @@ session_start();
                                 placeholder="Ej: Desarrollador Frontend, Contador Senior, Diseñador Gráfico..."
                                 required
                             >
-                        </div>
+                            <br>
+    
 
                         <!-- Descripción -->
                         <div class="form-section">
