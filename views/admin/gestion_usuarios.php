@@ -4,7 +4,7 @@ require_once '../../models/Usuarios.php';
 session_start();
 
 // Solo permitir admins
-if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'administrador') {
+if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'ADMIN') {
     header("Location: login.php");
     exit;
 }
@@ -203,20 +203,20 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
     </div>
 </div>
 
-                    <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="empty-state">
-                                        <i class="fas fa-users"></i>
-                                        <h5>No hay usuarios registrados</h5>
-                                        <p class="text-muted">Aún no se han registrado usuarios en el sistema.</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                        </tbody>
-                    </table>
+<?php endforeach; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="5">
+            <div class="empty-state">
+            <i class="fas fa-users"></i>
+            <h5>No hay usuarios registrados</h5>
+                <p class="text-muted">Aún no se han registrado usuarios en el sistema.</p>
+            </div>
+            </td>
+            </tr>
+<?php endif; ?>
+</tbody>
+            </table>
                 </div>
             </div>
         </div>

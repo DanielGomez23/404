@@ -63,3 +63,18 @@ CREATE TABLE IF NOT EXISTS postulaciones (
     FOREIGN KEY (id_oferta) REFERENCES ofertas_trabajo(id)
 );
 
+
+--------------------------------------------------
+-- Esto es de Brahiam, Rolando cuando organice la base de datos intente ingresar esto de postulacion para que funcione 
+USE project_db;
+DROP TABLE IF EXISTS postulaciones;
+
+CREATE TABLE postulaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    cv VARCHAR(255) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha_postulacion DATETIME DEFAULT CURRENT_TIMESTAMP
+);

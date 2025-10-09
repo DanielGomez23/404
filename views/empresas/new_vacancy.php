@@ -73,7 +73,7 @@ session_start();
                         </p>
                     </div>
                     <form id="crearVacanteForm" action="../../controllers/vacanteController.php" method="POST">
-                            <input type="hidden" name="id_reclutador" value="<?php echo $_SESSION['usuario_id']; ?>">
+                            <input type="hidden" name="id_reclutador" value="<?php echo $_SESSION['usuario_id']; ?>
 
                         <!-- Título del Puesto -->
                         <div class="form-section">
