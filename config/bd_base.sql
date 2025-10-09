@@ -49,6 +49,9 @@ CREATE TABLE IF NOT EXISTS ofertas_trabajo (
     descripcion TEXT,
     ubicacion VARCHAR(100),
     fecha_publicacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    requisitos TEXT NULL,
+    salario_min DECIMAL(10,2) NULL,
+    salario_max DECIMAL(10,2) NULL;
     FOREIGN KEY (id_reclutador) REFERENCES reclutador(cedula)
 );
 
