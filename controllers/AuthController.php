@@ -51,76 +51,68 @@ class AuthController {
 
     // Iniciar sesión
     public function iniciarSesion() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-            $rol = trim($_POST['rol'] ?? '');
-            $correo = trim($_POST['correo'] ?? '');
-            $contrasena = trim($_POST['contrasena'] ?? '');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+        $rol = trim($_POST['rol'] ?? '');
+        $correo = trim($_POST['correo'] ?? '');
+        $contrasena = trim($_POST['contrasena'] ?? '');
 
-            if (!$rol || !$correo || !$contrasena) {
+        if (!$rol || !$correo || !$contrasena) {
+            $this->alerta->mostrarAlerta(
+                'warning', 
+                'Campos obligatorios', 
+                'Todos los campos son obligatorios.', 
+                '../views/login.php'
+            );
+        }
+
+        $usuario = $this->usuario->iniciarSesion($rol, $correo, $contrasena);
+
+        if ($usuario) {
+            $_SESSION['usuario_id'] = $usuario['cedula'];
+            $_SESSION['usuario_nombre'] = $usuario['nombre'];
+            $_SESSION['usuario_rol'] = $usuario['rol'];
+
+            // Redirige según el rol
+            if ($usuario['rol'] === 'administrador') {
                 $this->alerta->mostrarAlerta(
-                    'warning',
-                    'Campos obligatorios',
-                    'Todos los campos son obligatorios.',
-                    '../views/login.php'
+                    'success', 
+                    'Bienvenido', 
+                    "Hola {$usuario['nombre']}, bienvenido al panel de administrador.", 
+                    '../views/admin/dash_admin.php'
                 );
-            }
-
-            $usuario = $this->usuario->iniciarSesion($rol, $correo, $contrasena);
-
-            if ($usuario) {
-                $_SESSION['usuario_id'] = $usuario['cedula'];
-                $_SESSION['usuario_nombre'] = $usuario['nombre'];
-                $_SESSION['usuario_rol'] = $usuario['rol'];
-
-                // 🔹 Redirigir según el rol
-                switch ($usuario['rol']) {
-
-                    case 'administrador':
-                        $this->alerta->mostrarAlerta(
-                            'success',
-                            'Bienvenido Administrador',
-                            "Hola {$usuario['nombre']}, bienvenido al panel de administrador.",
-                            '../views/admin/dash_admin.php'
-                        );
-                        break;
-
-                    case 'reclutador':
-                        $this->alerta->mostrarAlerta(
-                            'success',
-                            'Bienvenido Reclutador',
-                            "Hola {$usuario['nombre']}, bienvenido a la gestión de postulaciones.",
-                            '../views/admin/gestion_postulantes.php'
-                        );
-                        break;
-
-                        case 'postulante':
-                            $this->alerta->mostrarAlerta(
-                                'success',
-                                'Bienvenido Profesional',
-                                "Hola {$usuario['nombre']}, siéntete libre de postularte.",
-                                '../views/profesional/nuevaPostulacion.php'
-                            );
-                            break;
-
-                    default:
-                        $this->alerta->mostrarAlerta(
-                            'success',
-                            'Bienvenido',
-                            "Hola {$usuario['nombre']}, bienvenido al sistema.",
-                            '../views/dashboard.php'
-                        );
-                        break;
-                }
+            } elseif ($usuario['rol'] === 'reclutador') {
+                $this->alerta->mostrarAlerta(
+                    'success', 
+                    'Bienvenido', 
+                    "Hola {$usuario['nombre']}, bienvenido al sistema de empresas.", 
+                    '../views/empresas/dash_reclutadores.php'
+                );
+            } elseif ($usuario['rol'] === 'postulante') { // 
+                $this->alerta->mostrarAlerta(
+                    'success', 
+                    'Bienvenido', 
+                    "Hola {$usuario['nombre']}, bienvenido a tu panel de profesional.", 
+                    '../views/profesionales/dash_profesional.php'
+                );
             } else {
                 $this->alerta->mostrarAlerta(
-                    'error',
-                    'Error de autenticación',
-                    'Credenciales incorrectas.',
+                    'error', 
+                    'Error de autenticación', 
+                    'Rol no reconocido.', 
                     '../views/login.php'
                 );
             }
+        } else {
+            $this->alerta->mostrarAlerta(
+                'error', 
+                'Error de autenticación', 
+                'Credenciales incorrectas.', 
+                '../views/login.php'
+            );
         }
     }
+}
+
 
     // Editar usuario
     public function editarUsuario() {
