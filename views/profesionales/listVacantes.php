@@ -3,10 +3,10 @@ session_start();
 require_once '../../config/Database.php';
 
 // Solo permitir acceso a profesionales
-if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'profesional') {
-    header("Location: ../login.php");
-    exit;
-}
+// if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'profesional') {
+//     header("Location: ../login.php");
+//     exit;
+// }
 
 // Conexión
 $conn = Database::getConnection();

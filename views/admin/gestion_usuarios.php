@@ -3,11 +3,11 @@ require_once '../../config/Database.php';
 require_once '../../models/Usuarios.php';
 session_start();
 
-// Solo permitir admins
-if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'ADMIN') {
-    header("Location: login.php");
-    exit;
-}
+// // Solo permitir admins
+// if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'ADMIN') {
+//     header("Location: login.php");
+//     exit;
+// }
 
 $conn = Database::getConnection();
 $usuarioModel = new Usuario($conn);
