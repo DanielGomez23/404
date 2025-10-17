@@ -136,7 +136,7 @@ class AuthController {
                     'success',
                     'Usuario actualizado',
                     'El usuario fue actualizado correctamente.',
-                    '../views/gestion_usuarios.php'
+                    '../views/admin/gestion_usuarios.php'
                 );
             } else {
                 $this->alerta->mostrarAlerta(
@@ -160,7 +160,7 @@ class AuthController {
                     'success',
                     'Usuario eliminado',
                     'El usuario fue eliminado correctamente.',
-                    '../views/gestion_usuarios.php'
+                    '../views/admin/gestion_usuarios.php'
                 );
             } else {
                 $this->alerta->mostrarAlerta(

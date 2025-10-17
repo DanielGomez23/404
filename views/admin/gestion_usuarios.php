@@ -46,7 +46,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                         <?= htmlspecialchars($_SESSION['usuario_nombre']) ?>
                         <small class="d-block opacity-75"><?= htmlspecialchars($_SESSION['usuario_rol']) ?></small>
                     </div>
-                    <a href="logout.php" class="btn-logout">
+                    <a href="../logout.php" class="btn-logout">
                         <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
                     </a>
                 </div>
@@ -135,7 +135,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                                         </button>
 
                                         <!-- Botón eliminar -->
-                                        <form method="POST" action="../controllers/AuthController.php" style="display:inline;">
+                                        <form method="POST" action="../../controllers/AuthController.php" style="display:inline;">
                                             <input type="hidden" name="rol" value="<?= $u['rol'] ?>">
                                             <input type="hidden" name="cedula" value="<?= $u['cedula'] ?>">
                                             <button type="submit" name="eliminar" class="btn btn-delete btn-modern"
@@ -158,7 +158,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method="POST" action="../controllers/AuthController.php">
+            <form method="POST" action="../../controllers/AuthController.php">
                 <div class="modal-body">
                     <!-- Rol oculto -->
                     <input type="hidden" name="rol" value="<?= htmlspecialchars($u['rol']) ?>">

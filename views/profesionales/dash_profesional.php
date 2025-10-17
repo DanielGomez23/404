@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../public/css/dash_reclutador.css">
 </head>
 <body>
-    <!-- Header Administrativo -->
+    <!-- Header Profesional -->
     <nav class="admin-header">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
@@ -80,7 +80,7 @@
                     <h3 class="card-title">Vacantes</h3>
                     <p class="card-description">
                     </p>
-                    <a href="nuevaPostulacion.php" class="card-action">
+                    <a href="listVacantes.php" class="card-action">
                         <i class="fas fa-user-cog me-2"></i>
                         Tu próximo empleo
                     </a>

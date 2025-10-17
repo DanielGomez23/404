@@ -61,6 +61,9 @@ class Usuario {
         }
         return null;
     }
+
+    // Actualizar usuario
+    
 public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,string $nombre,string $correo): bool {
     $roles = ["postulante", "reclutador", "administrador"];
     if (!in_array($rol, $roles)) {
@@ -93,6 +96,8 @@ public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,s
 
         $stmt->bind_param("i", $cedula);
         return $stmt->execute();
+
+
     }
     // Obtener todos los usuarios (para admin)
     public function obtenerTodosUsuarios(): array {
@@ -111,5 +116,14 @@ public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,s
         }
         return $usuarios;
     }
+
+    // Obtener las vacantes para profesional
+    public function obtenerVacantes(): array {
+    $sql = "SELECT * FROM ofertas_trabajo";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
+}
+
 ?>
