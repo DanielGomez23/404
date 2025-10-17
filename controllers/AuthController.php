@@ -118,14 +118,12 @@ class AuthController {
     public function editarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar'])) {
             $rol = trim($_POST['rol'] ?? '');
-            $cedula_original = intval($_POST['cedula_original'] ?? 0);
             $cedula = intval($_POST['cedula'] ?? 0);
             $nombre = trim($_POST['nombre'] ?? '');
             $correo = trim($_POST['email'] ?? '');
 
             $actualizado = $this->usuario->actualizarUsuario(
                 $rol,
-                $cedula_original,
                 $cedula,
                 $nombre,
                 $correo

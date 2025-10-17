@@ -61,7 +61,7 @@ class Usuario {
         }
         return null;
     }
-public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,string $nombre,string $correo): bool {
+public function actualizarUsuario(string $rol,int $cedula,string $nombre,string $correo): bool {
     $roles = ["postulante", "reclutador", "administrador"];
     if (!in_array($rol, $roles)) {
         return false;
@@ -73,7 +73,7 @@ public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,s
     $stmt = $this->conn->prepare($sql);
     if (!$stmt) return false;
 
-    $stmt->bind_param("issi", $cedula, $nombre, $correo, $cedula_original);
+    $stmt->bind_param("iss", $cedula, $nombre, $correo);
 
     return $stmt->execute();
 }
