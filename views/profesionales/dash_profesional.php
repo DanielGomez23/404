@@ -80,7 +80,7 @@
                     <h3 class="card-title">Vacantes</h3>
                     <p class="card-description">
                     </p>
-                    <a href="new_vacancy.php" class="card-action">
+                    <a href="nuevaPostulacion.php" class="card-action">
                         <i class="fas fa-user-cog me-2"></i>
                         Tu próximo empleo
                     </a>
