@@ -91,7 +91,7 @@ $vacantes = $usuarioModel->obtenerVacantes();
 <!-- Lista de Vacantes -->
 <div class="row">
     <?php foreach ($vacantes as $vacante): ?>
-        <div class="col-md-4 mb-4"> <!-- Mismo tamaño que tus anteriores cards -->
+        <div class="col-md-4 mb-4"> 
             <div class="vacante-card fade-in h-100">
                 <div class="vacante-header">
                     <div>
