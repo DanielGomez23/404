@@ -24,35 +24,13 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/gestion_u.css">
+    <link rel="stylesheet" href="../../public/css/header.css">
     
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header-section">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-section">
-                    <h1><i class="fas fa-users-cog me-2"></i>Panel de Administración</h1>
-                    <p class="mb-0 opacity-75">Gestión de usuarios - Antioquia Unida</p>
-                </div>
-                <div class="user-info">
-                    <button onclick="history.back()" class="btn-back">
-                        <i class="fas fa-arrow-left me-2"></i>Volver
-                    </button>
-                    
-                    <div class="user-badge">
-                        <i class="fas fa-user-shield me-2"></i>
-                        <?= htmlspecialchars($_SESSION['usuario_nombre']) ?>
-                        <small class="d-block opacity-75"><?= htmlspecialchars($_SESSION['usuario_rol']) ?></small>
-                    </div>
-                    <a href="../logout.php" class="btn-logout">
-                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 
     <div class="container">
         <div class="main-content">

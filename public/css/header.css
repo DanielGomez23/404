@@ -1,0 +1,129 @@
+:root{
+  --azul-1: #0E60B7; /* rgb(14,96,183) */
+  --azul-2: #155CA7;
+  --accent-naranja: #FF6347;
+  --accent-naranja-dark: #D7442A;
+  --azul-claro: #4A90E2;
+  --blanco-trans: rgba(255,255,255,0.9);
+}
+
+/* ================================
+   HEADER ADMIN (AZUL + NARANJA)
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-header {
+  background: linear-gradient(135deg, var(--azul-1) 0%, var(--azul-2) 100%);
+  /* mantiene algo de transparencia si lo deseas:
+     background: rgba(14,96,183,0.95); */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 6px 18px rgba(6, 30, 70, 0.35);
+  font-family: 'Inter', sans-serif;
+}
+
+/* LOGO / NOMBRE */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* BADGE DE ROL */
+.navbar-brand .admin-badge {
+  background: var(--accent-naranja);
+  color: #fff;
+  padding: 0.28rem 0.85rem;
+  border-radius: 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 0.8rem;
+  animation: pulse 2s infinite;
+  box-shadow: 0 6px 20px rgba(255,99,71,0.12);
+}
+
+/* LINKS DE NAVEGACIÓN */
+.nav-link {
+  color: var(--blanco-trans) !important;
+  font-weight: 600;
+  transition: all 0.22s ease;
+  margin: 0 10px;
+  position: relative;
+  padding: 0.15rem 0.25rem;
+}
+
+.nav-link::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  transition: width .25s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover{
+  color: #ffffff !important;
+  transform: translateY(-3px);
+}
+
+.nav-link:hover::after{
+  width: 100%;
+  background: rgba(255,255,255,0.18);
+}
+
+.btn-logout {
+  background: var(--accent-naranja);
+  border: 2px solid rgba(255,255,255,0.18);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.55rem 1.3rem;
+  border-radius: 28px;
+  transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+  box-shadow: 0 8px 24px rgba(255,99,71,0.12);
+}
+
+.btn-logout:hover{
+  background: var(--accent-naranja-dark);
+  border-color: var(--accent-naranja);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(215,68,42,0.18);
+}
+
+/* Pequeña diferencia visual para iconos dentro del header */
+.admin-header i {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.05rem;
+}
+
+/* ANIMACIONES */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(255,99,71,0.12);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 16px rgba(255,99,71,0.22);
+  }
+}
+
+/* RESPONSIVE: reducir tamaño de logo en pantallas pequeñas */
+@media (max-width: 576px) {
+  .navbar-brand { font-size: 1.2rem; }
+  .nav-link { display: none; } /* puedes adaptarlo para un menú hamburguesa */
+  .btn-logout { padding: 0.45rem 0.9rem; font-size: 0.9rem; }
+}

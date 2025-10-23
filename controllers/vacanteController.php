@@ -69,14 +69,14 @@ class VacanteController {
                     "success", 
                     "Vacante publicada", 
                     "Tu vacante fue publicada con éxito.", 
-                    "../views/empresas/dash_reclutador.php"
+                    "../views/empresas/dash_reclutadores.php"
                 );
             } else {
                 $this->alerta->mostrarAlerta(
                     "error", 
                     "Error", 
                     "No se pudo publicar la vacante.", 
-                    "../views/empresas/dash_reclutador.php"
+                    "../views/empresas/new_vacancy.php"
                 );
             }
         }
