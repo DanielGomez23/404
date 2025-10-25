@@ -119,10 +119,11 @@ $vacantes = $usuarioModel->obtenerVacantes();
                             <i class="fas fa-info-circle me-2"></i>
                             Ver más
                         </a>
-                        <a href="#" class="btn-aplicar">
+                        <a href="nuevaPostulacion.php?id=<?= $vacante['id']; ?>" class="btn-aplicar">
                             <i class="fas fa-paper-plane me-2"></i>
                             Aplicar ahora
                         </a>
+
                     </div>
                 </div>
             </div>

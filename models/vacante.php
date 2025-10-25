@@ -6,33 +6,35 @@ class Vacante {
         $this->conn = $conn;
     }
 
-  public function crearVacante($idReclutador, $titulo, $descripcion, $ubicacion, $requisitos, $salario_min, $salario_max) {
-    $sql = "INSERT INTO ofertas_trabajo 
-            (id_reclutador, titulo, descripcion, ubicacion, fecha_publicacion, requisitos, salario_min, salario_max) 
-            VALUES (?, ?, ?, ?, NOW(), ?, ?, ?)";
+    public function crearVacante($idReclutador, $titulo, $descripcion, $ubicacion, $requisitos, $salario_min, $salario_max, $modalidad = 'No definida', $nivel = 'No indicado') {
+        $sql = "INSERT INTO ofertas_trabajo 
+                (id_reclutador, titulo, descripcion, ubicacion, fecha_publicacion, requisitos, salario_min, salario_max, modalidad, nivel) 
+                VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
 
-    $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
-    if (!$stmt) {
-        die("Error en prepare: " . $this->conn->error);
+        if (!$stmt) {
+            die('Error en prepare: ' . $this->conn->error);
+        }
+
+        $stmt->bind_param(
+            "issssddss",
+            $idReclutador,
+            $titulo,
+            $descripcion,
+            $ubicacion,
+            $requisitos,
+            $salario_min,
+            $salario_max,
+            $modalidad,
+            $nivel
+        );
+
+        if (!$stmt->execute()) {
+            die('Error en execute: ' . $stmt->error);
+        }
+
+        return true;
     }
-
-    $stmt->bind_param("issssdd", 
-        $idReclutador, 
-        $titulo, 
-        $descripcion, 
-        $ubicacion, 
-        $requisitos, 
-        $salario_min, 
-        $salario_max
-    );
-
-    if (!$stmt->execute()) {
-        die("Error en execute: " . $stmt->error);
-    }
-
-    return true;
-}
-
 }
 ?>

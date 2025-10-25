@@ -81,3 +81,9 @@ CREATE TABLE postulaciones (
     mensaje TEXT NOT NULL,
     fecha_postulacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+USE project_db;
+ALTER TABLE ofertas_trabajo
+ADD COLUMN modalidad VARCHAR(50) DEFAULT 'No definida',
+ADD COLUMN nivel VARCHAR(50) DEFAULT 'No indicado';
+-- Agregar columna de nivel de experiencia a la tabla ofertas_trabajo para que no de error

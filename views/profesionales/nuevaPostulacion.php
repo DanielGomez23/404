@@ -1,8 +1,32 @@
-<?php
+<?php 
 require_once '../../config/Database.php';
 require_once '../../models/Usuarios.php';
+
+// Asegurar que la cookie de sesión funcione en todo el sitio
+ini_set('session.cookie_path', '/');
+
 session_start();
 
+// 🔒 Verificar sesión activa
+if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
+    echo "<script>
+            alert('Sesión inválida. Por favor inicia sesión para postularte.');
+            window.location.href='../../views/login.php';
+          </script>";
+    exit;
+}
+
+// ✅ Validar que venga el ID de la vacante
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "<script>
+            alert('No se especificó la vacante a postular.');
+            window.location.href='../landing.php';
+          </script>";
+    exit;
+}
+
+$id_oferta = intval($_GET['id']); // id de la vacante seleccionada
+$usuario = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,13 +85,16 @@ session_start();
     <div class="container">
         <h2>Formulario de Postulación</h2>
 
-        <!-- Conexión directa al controlador -->
         <form action="../../controllers/postulacionController.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id_oferta" value="<?php echo htmlspecialchars($id_oferta); ?>">
+
             <label>Nombre completo:</label>
-            <input type="text" name="nombre" required>
+            <input type="text" name="nombre" 
+                   value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
 
             <label>Correo electrónico:</label>
-            <input type="email" name="correo" required>
+            <input type="email" name="correo" 
+                   value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
 
             <label>Teléfono:</label>
             <input type="text" name="telefono" required>
@@ -78,7 +105,7 @@ session_start();
             <label>Mensaje o motivación:</label>
             <textarea name="mensaje" rows="4" placeholder="Cuéntanos por qué te interesa esta vacante..." required></textarea>
 
-            <input type="submit" value="Enviar Postulación">
+            <input type="submit" name="postular" value="Enviar Postulación">
         </form>
     </div>
 </body>

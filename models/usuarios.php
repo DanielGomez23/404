@@ -118,12 +118,32 @@ public function actualizarUsuario(string $rol,int $cedula_original,int $cedula,s
     }
 
     // Obtener las vacantes para profesional
-    public function obtenerVacantes(): array {
-    $sql = "SELECT * FROM ofertas_trabajo";
+     //Se agrega el nombre del reclutador como 'empresa' para mostrarlo en la vista r.nombre AS empresa,
+    //Se crea un campo temporal 'tipo' para evitar errores en la vista (no existe en la BD)
+public function obtenerVacantes(): array {
+    $sql = "
+        SELECT 
+            o.id,
+            o.titulo,
+            o.descripcion,
+            o.ubicacion,
+            o.fecha_publicacion,
+            o.requisitos,
+            o.salario_min,
+            o.salario_max,
+            o.modalidad,
+            o.nivel,
+            r.nombre AS empresa,           -- Nombre del reclutador como empresa
+            'General' AS tipo              -- Tipo ficticio por si el código lo usa
+        FROM ofertas_trabajo o
+        INNER JOIN reclutador r ON o.id_reclutador = r.cedula
+    ";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
+
+
 }
 
 ?>

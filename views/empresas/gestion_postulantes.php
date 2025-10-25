@@ -60,7 +60,7 @@ $total_pages = ceil($total / $limit);
                     <small class="d-block opacity-75"><?= htmlspecialchars($_SESSION['usuario_rol']) ?></small>
                 </div>
 
-                <a href="../../logout.php" class="btn-logout">
+                <a href="../logout.php" class="btn-logout">
                     <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
                 </a>
             </div>

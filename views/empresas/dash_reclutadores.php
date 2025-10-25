@@ -30,7 +30,7 @@
                 <div class="admin-stats">
                     <div class="stat-item">
                         <span class="stat-number">5</span>
-                        <div class="stat-label">Bacantes Activas</div>
+                        <div class="stat-label">Vacantes Activas</div>
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">400</span>
@@ -73,7 +73,7 @@
                     <h3 class="card-title">Postulantes</h3>
                     <p class="card-description">
                     </p>
-                    <a href="gestion_empresas.php" class="card-action">
+                    <a href="gestion_postulantes.php" class="card-action">
                         <i class="fas fa-building me-2"></i>
                         Ver 
                     </a>
