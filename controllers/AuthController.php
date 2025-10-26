@@ -68,9 +68,11 @@ class AuthController {
         $usuario = $this->usuario->iniciarSesion($rol, $correo, $contrasena);
 
         if ($usuario) {
-            $_SESSION['usuario_id'] = $usuario['cedula'];
-            $_SESSION['usuario_nombre'] = $usuario['nombre'];
-            $_SESSION['usuario_rol'] = $usuario['rol'];
+    // Guarda también 'cedula' para compatibilidad con vistas antiguas
+    $_SESSION['usuario_id'] = $usuario['cedula'];
+    $_SESSION['cedula'] = $usuario['cedula']; // 🔹 <--- AGREGA ESTA LÍNEA
+    $_SESSION['usuario_nombre'] = $usuario['nombre'];
+    $_SESSION['usuario_rol'] = $usuario['rol'];
 
             // Redirige según el rol
             if ($usuario['rol'] === 'administrador') {

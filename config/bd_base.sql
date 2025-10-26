@@ -82,8 +82,22 @@ CREATE TABLE postulaciones (
     fecha_postulacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+--Todo esto es para que no de error al agregar nuevas columnas para el funcionamiento de la pagina
+
+-- Agregar columna de nivel de experiencia a la tabla ofertas_trabajo para que no de error
 USE project_db;
 ALTER TABLE ofertas_trabajo
 ADD COLUMN modalidad VARCHAR(50) DEFAULT 'No definida',
 ADD COLUMN nivel VARCHAR(50) DEFAULT 'No indicado';
--- Agregar columna de nivel de experiencia a la tabla ofertas_trabajo para que no de error
+
+
+USE project_db;
+
+ALTER TABLE postulaciones
+ADD COLUMN estado ENUM('enviada', 'vista', 'rechazada', 'aceptada') DEFAULT 'enviada' AFTER fecha_postulacion;
+USE project_db;
+
+ALTER TABLE postulaciones
+ADD COLUMN id_oferta INT NOT NULL AFTER id;
+
+-- Agregar columna estado a la tabla postulaciones

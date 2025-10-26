@@ -1,22 +1,8 @@
-<?php 
-require_once '../../config/Database.php';
-require_once '../../models/Usuarios.php';
-
-// Asegurar que la cookie de sesión funcione en todo el sitio
-ini_set('session.cookie_path', '/');
-
+<?php
 session_start();
+require_once '../../config/DATABASE.php';
 
-// 🔒 Verificar sesión activa
-if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
-    echo "<script>
-            alert('Sesión inválida. Por favor inicia sesión para postularte.');
-            window.location.href='../../views/login.php';
-          </script>";
-    exit;
-}
-
-// ✅ Validar que venga el ID de la vacante
+// Verificar si llega el ID de la vacante
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "<script>
             alert('No se especificó la vacante a postular.');
@@ -26,7 +12,23 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 
 $id_oferta = intval($_GET['id']); // id de la vacante seleccionada
-$usuario = $_SESSION['usuario'];
+
+// Puedes dejar vacío el usuario si no hay sesión
+$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : [
+    'nombre' => '',
+    'email'  => ''
+];
+
+// 🔴 Se elimina la verificación de login obligatorio
+/*
+if (!isset($_SESSION['cedula']) || $_SESSION['usuario_rol'] !== 'postulante') {
+    echo "<script>
+            alert('Debes iniciar sesión como postulante para aplicar.');
+            window.location.href='../login.php';
+          </script>";
+    exit;
+}
+*/
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -86,7 +88,8 @@ $usuario = $_SESSION['usuario'];
         <h2>Formulario de Postulación</h2>
 
         <form action="../../controllers/postulacionController.php" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="id_oferta" value="<?php echo htmlspecialchars($id_oferta); ?>">
+            <input type="hidden" name="id_oferta" value="<?= $_GET['id']; ?>">
+
 
             <label>Nombre completo:</label>
             <input type="text" name="nombre" 
