@@ -18,5 +18,10 @@ class Postulacion{
         $stmt->execute([$id_postulante, $id_oferta]);
         return $stmt->fetch();
     }
+    public function actualizarEstado($id_postulacion, $nuevo_estado) {
+        $query = "UPDATE postulaciones SET estado = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$nuevo_estado, $id_postulacion]);
+    }
 }
 ?>

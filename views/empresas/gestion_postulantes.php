@@ -113,7 +113,7 @@ $total_pages = ceil($total / $limit);
                             <th>Teléfono</th>
                             <th>Hoja de Vida</th>
                             <th>Fecha</th>
-                            <th>Acciones</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,10 +131,18 @@ $total_pages = ceil($total / $limit);
                                     </a>
                                 </td>
                                 <td><?= date("d/m/Y H:i", strtotime($p['fecha_postulacion'])) ?></td>
+                        
                                 <td>
-                                    <button class="btn btn-info btn-modern" data-bs-toggle="modal" data-bs-target="#verModal<?= $p['id'] ?>">
-                                        Ver
-                                    </button>
+                                    <form method="POST" action="../../controllers/PostulacionController.php" style="display:inline;">
+                                        <input type="hidden" name="accion" value="actualizarEstado">
+                                        <input type="hidden" name="id_postulacion" value="<?= htmlspecialchars($p['id'], ENT_QUOTES) ?>">
+                                        <select name="estado" class="btn btn-info btn-modern" onchange="this.form.submit()">
+                                            <option value="enviada" <?= $p['estado'] === 'enviada' ? 'selected' : '' ?>>Enviada</option>
+                                            <option value="vista" <?= $p['estado'] === 'vista' ? 'selected' : '' ?>>Vista</option>
+                                            <option value="rechazada" <?= $p['estado'] === 'rechazada' ? 'selected' : '' ?>>Rechazada</option>
+                                            <option value="aceptada" <?= $p['estado'] === 'aceptada' ? 'selected' : '' ?>>Aceptada</option>
+                                        </select>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -161,6 +169,40 @@ $total_pages = ceil($total / $limit);
         </div>
     </div>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".estado-selector").forEach(select => {
+        select.addEventListener("change", async () => {
+            const id = select.dataset.id;
+            const estado = select.value;
+
+            const formData = new URLSearchParams();
+            formData.append("accion", "cambiarEstado");
+            formData.append("id_oferta", id);
+            formData.append("estado", estado);
+
+            try {
+                const res = await fetch("../../controllers/postulacionController.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: formData.toString()
+                });
+
+                const text = await res.text();
+                if (text.trim() === "ok") {
+                    alert("Estado actualizado correctamente");
+                } else {
+                    alert("Error al actualizar el estado");
+                }
+            } catch (err) {
+                alert("Error de conexión con el servidor");
+            }
+        });
+    });
+});
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

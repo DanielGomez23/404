@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once "../config/Database.php";
+require_once "../models/Postulacion.php";
+
 
 class PostulacionController {
 
@@ -63,8 +65,52 @@ class PostulacionController {
             }
         }
     }
+
+    public function cambiarEstado() {
+        $conn = Database::getConnection();
+        if (!$conn) {
+            http_response_code(500);
+            echo "Error: No hay conexión con la BD.";
+            exit;
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $id_postulacion = intval($_POST['id_postulacion'] ?? $_POST['id'] ?? 0);
+            $nuevo_estado = $_POST['estado'] ?? '';
+
+            $estados_permitidos = ['enviada', 'vista', 'rechazada', 'aceptada'];
+            if ($id_postulacion <= 0 || !in_array($nuevo_estado, $estados_permitidos)) {
+                http_response_code(400);
+                echo "Datos inválidos";
+                exit;
+            }
+
+            $postulacionModel = new Postulacion($conn);
+
+            $resultado = $postulacionModel->actualizarEstado($id_postulacion, $nuevo_estado);
+
+            if ($resultado) {
+                if (isset($_POST['ajax']) && $_POST['ajax'] == '1') {
+                    echo "ok";
+                    exit;
+                }
+                echo "<script>alert('Estado actualizado correctamente'); window.location.href='../views/empresas/gestion_postulantes.php';</script>";
+                exit;
+            } else {
+                echo "Error al actualizar el estado";
+                exit;
+            }
+        }
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    (new PostulacionController())->postular();
+    $accion = $_POST['accion'] ?? $_POST['action'] ?? 'postular';
+    $controller = new PostulacionController();
+
+    if (in_array($accion, ['cambiarEstado', 'actualizarEstado'])) {
+        $controller->cambiarEstado();
+    } else {
+        $controller->postular();
+    }
 }
