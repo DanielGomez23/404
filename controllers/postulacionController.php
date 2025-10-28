@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once "../config/Database.php";
 require_once "../models/Postulacion.php";
 
@@ -13,6 +15,7 @@ class PostulacionController {
             die("Error: No hay conexión con la BD.");
         }
 
+        
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             
 

@@ -4,11 +4,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start(); // <-- necesario para usar $_SESSION
-
-require_once '../config/Database.php';
-require_once '../models/vacante.php';
-require_once '../controllers/AuthController.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/vacante.php';
+require_once __DIR__ . '/AuthController.php';
 
 class VacanteController {
     private Vacante $vacante;
@@ -95,19 +96,66 @@ class VacanteController {
         }
     }
 
-    public function listarVacantes() {
-        return $this->vacante->obtenerVacantes();
+        public function listarVacantes() {
+            return $this->vacante->obtenerVacantes();
+        }
+        
+        public function eliminarVacante()
+        {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+                if (!isset($_SESSION['usuario_id'])) {
+                    header("Location: ../views/login.php");
+                    exit;
+                }
+                
+                $idVacante = (int) $_GET['id'];
+                $idReclutador = (int) $_SESSION['usuario_id'];
+                
+                if ($this->vacante->eliminarVacante($idVacante, $idReclutador)) {
+                    $this->alerta->mostrarAlerta(
+                        "success",
+                        "Vacante eliminada",
+                        "La vacante fue eliminada correctamente.",
+                        "../views/empresas/dash_reclutadores.php"
+                    );
+                } else {
+                    $this->alerta->mostrarAlerta(
+                        "error",
+                        "Error",
+                        "No se pudo eliminar la vacante.",
+                        "../views/empresas/dash_reclutadores.php"
+                    );
+                }
+            }
+        }
+        
     }
-}
-
-// Conexión
-$conn = Database::getConnection();
-
-// Crear instancia del controlador
-$vacanteController = new VacanteController();
-
+        
+        
+        // Conexión
+        $conn = Database::getConnection();
+        
+        // Crear instancia del controlador
+        $vacanteController = new VacanteController();
+        
 // Ejecutar según formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['postulacion'])) {
     $vacanteController->postularVacante();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    $vacanteController = new VacanteController();
+
+    switch ($_GET['action']) {
+        case 'eliminar':
+            $vacanteController->eliminarVacante();
+            break;
+
+        default:
+            echo "Acción no reconocida.";
+            break;
+    }
+}
+
+
 ?>

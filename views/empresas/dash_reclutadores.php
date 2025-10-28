@@ -84,10 +84,10 @@
                     <div class="card-icon">
                         <i class="fas fa-building"></i>
                     </div>
-                    <h3 class="card-title">Mi empresa</h3>
+                    <h3 class="card-title">Mis Vacantes</h3>
                     <p class="card-description">
                     </p>
-                    <a href="gestion_ofertas.php" class="card-action">
+                    <a href="misVacantes.php" class="card-action">
                         <i class="fas fa-briefcase me-2"></i>
                         Gestiona tu perfil
                     </a>
