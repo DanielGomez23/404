@@ -15,6 +15,7 @@ class PostulacionController {
             die("Error: No hay conexión con la BD.");
         }
 
+        
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $id_oferta = intval($_POST['id_oferta'] ?? 0);
@@ -33,8 +34,9 @@ class PostulacionController {
                 exit;
             }
 
-            $dir = __DIR__ . "/../../hojas_de_vida/";
+            $dir = dirname(__DIR__) . "/hojas_de_vida/";
             if (!is_dir($dir)) mkdir($dir, 0777, true);
+
 
             $ext = strtolower(pathinfo($_FILES['cv']['name'], PATHINFO_EXTENSION));
             if ($ext !== "pdf") {
