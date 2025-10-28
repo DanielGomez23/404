@@ -14,6 +14,7 @@ class PostulacionController {
         }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            
 
             $id_oferta = intval($_POST['id_oferta'] ?? 0);
             $nombre = $conn->real_escape_string($_POST['nombre'] ?? '');
@@ -31,8 +32,9 @@ class PostulacionController {
                 exit;
             }
 
-            $dir = __DIR__ . "/../../hojas_de_vida/";
+            $dir = dirname(__DIR__) . "/hojas_de_vida/";
             if (!is_dir($dir)) mkdir($dir, 0777, true);
+
 
             $ext = strtolower(pathinfo($_FILES['cv']['name'], PATHINFO_EXTENSION));
             if ($ext !== "pdf") {
