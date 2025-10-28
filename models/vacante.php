@@ -36,5 +36,26 @@ class Vacante {
 
         return true;
     }
+
+    public function eliminarVacante($idVacante, $idReclutador)
+{
+    $sql = "DELETE FROM ofertas_trabajo WHERE id = ? AND id_reclutador = ?";
+    $stmt = $this->conn->prepare($sql);
+
+    if (!$stmt) {
+        die('Error al preparar la consulta: ' . $this->conn->error);
+    }
+
+    $stmt->bind_param("ii", $idVacante, $idReclutador);
+
+    if ($stmt->execute()) {
+        return $stmt->affected_rows > 0;
+    } else {
+        error_log('Error al eliminar vacante: ' . $stmt->error);
+        return false;
+    }
+}
+
+
 }
 ?>

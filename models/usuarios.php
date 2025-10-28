@@ -143,6 +143,20 @@ public function obtenerVacantes(): array {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+public function obtenerVacantesPorUsuario($idReclutador) {
+    try {
+        $sql = "SELECT * FROM ofertas_trabajo WHERE id_reclutador = ? ORDER BY fecha_publicacion DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $idReclutador);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    } catch (Exception $e) {
+        error_log("Error al obtener vacantes del reclutador: " . $e->getMessage());
+        return [];
+    }
+}
+
 
 }
 

@@ -54,13 +54,13 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">
-                        <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'profesional'; })) ?>
+                        <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'postulante'; })) ?>
                     </div>
                     <div>Profesionales</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">
-                        <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'empresa'; })) ?>
+                        <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'reclutador'; })) ?>
                     </div>
                     <div>Empresas</div>
                 </div>

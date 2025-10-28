@@ -1,9 +1,10 @@
 <?php
-require_once '../config/Database.php';
-require_once '../models/Usuarios.php';
-require_once '../utils/alerta.php';
-session_start();
-
+require_once __DIR__ . '/../models/usuarios.php';
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../utils/alerta.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 class AuthController {
     private Usuario $usuario;
     private Alerta $alerta;
