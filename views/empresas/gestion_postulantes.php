@@ -83,7 +83,7 @@ $total_pages = ceil($total / $limit);
                 <a href="../logout.php" class="btn-logout">
                     <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
                 </a>
-            </div>
+            </div
         </div>
     </div>
 </div>

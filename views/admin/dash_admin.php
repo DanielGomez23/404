@@ -80,18 +80,17 @@
                     </a>
                 </div>
 
-                <!-- Ofertas Laborales -->
                 <div class="admin-card fade-in">
                     <div class="card-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
-                    <h3 class="card-title">Ofertas Laborales</h3>
+                    <h3 class="card-title">Vacantes</h3>
                     <p class="card-description">
-                        Modera y gestiona todas las ofertas de trabajo publicadas en la plataforma.
+                        Califica vacantes
                     </p>
-                    <a href="gestion_ofertas.php" class="card-action">
+                    <a href="vacantes.php" class="card-action">
                         <i class="fas fa-briefcase me-2"></i>
-                        Gestionar Ofertas
+                        Gestionar Vacantes
                     </a>
                 </div>
 
