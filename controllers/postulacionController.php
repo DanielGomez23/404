@@ -17,7 +17,7 @@ class PostulacionController {
 
         
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+            
             $id_oferta = intval($_POST['id_oferta'] ?? 0);
             $nombre = $conn->real_escape_string($_POST['nombre'] ?? '');
             $correo = $conn->real_escape_string($_POST['correo'] ?? '');
