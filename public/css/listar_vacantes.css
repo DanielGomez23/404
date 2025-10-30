@@ -447,3 +447,16 @@ body {
             margin-top: 0.5rem;
         }
     }
+
+
+    .vacante-badge.buena {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.vacante-badge.recomendada {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+}
+
+.vacante-badge.urgente {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+}

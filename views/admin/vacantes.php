@@ -2,7 +2,6 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once '../../config/DATABASE.php';
 require_once '../../controllers/vacanteController.php';
 
 if (!isset($_SESSION['usuario_id'])) {
@@ -57,9 +56,34 @@ $vacanteController->eliminarVacante();
                                     <?= htmlspecialchars($vacante['descripcion']); ?>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="vacante-info">
+                            <?php if ($vacante['calificacion'] != 'normal'): ?>
+        <?php
+        $badges = [
+            'buena' => ['class' => 'buena', 'icon' => 'fa-thumbs-up', 'text' => 'Buena Oferta'],
+            'recomendada' => ['class' => 'recomendada', 'icon' => 'fa-star', 'text' => 'Recomendada'],
+            'destacada' => ['class' => 'urgente', 'icon' => 'fa-fire', 'text' => 'Destacada']
+        ];
+        $badge = $badges[$vacante['calificacion']];
+        ?>
+        <span class="vacante-badge <?= $badge['class']; ?>">
+            <i class="fas <?= $badge['icon']; ?> me-1"></i>
+            <?= $badge['text']; ?>
+        </span>
+    <?php endif; ?>
+
+    <form method="POST" action="calif_vacantes.php">
+    <input type="hidden" name="vacante_id" value="<?= $vacante['id']; ?>">
+    <select name="calificacion" class="form-select form-select-sm" onchange="this.form.submit()">
+        <option value="normal" <?= $vacante['calificacion'] == 'normal' ? 'selected' : ''; ?>>Normal</option>
+        <option value="buena" <?= $vacante['calificacion'] == 'buena' ? 'selected' : ''; ?>>Buena</option>
+        <option value="recomendada" <?= $vacante['calificacion'] == 'recomendada' ? 'selected' : ''; ?>>Recomendada</option>
+        <option value="destacada" <?= $vacante['calificacion'] == 'destacada' ? 'selected' : ''; ?>>Destacada</option>
+    </select>
+</form>
+
+</div>
+ <div class="vacante-info">
                             <div class="info-item">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span><?= htmlspecialchars($vacante['ubicacion']); ?></span>

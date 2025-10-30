@@ -80,11 +80,24 @@ $vacantes = $usuarioModel->obtenerVacantes();
                         </div>
                     </div>
 
-                    <span class="vacante-badge <?= ($vacante['tipo'] == 'Urgente') ? 'urgente' : '' ?>">
-                        <i class="fas <?= ($vacante['tipo'] == 'Urgente') ? 'fa-fire' : 'fa-star' ?> me-1"></i>
-                        <?= $vacante['tipo'] ?>
-                    </span>
+                    <?php if (isset($vacante['calificacion']) && $vacante['calificacion'] != 'normal'): ?>
+    <?php
+    $badges = [
+        'buena' => ['class' => 'buena', 'icon' => 'fa-thumbs-up', 'text' => 'Buena Oferta'],
+        'recomendada' => ['class' => 'recomendada', 'icon' => 'fa-star', 'text' => 'Recomendada'],
+        'destacada' => ['class' => 'urgente', 'icon' => 'fa-fire', 'text' => 'Destacada']
+    ];
+    $badge = $badges[$vacante['calificacion']];
+    ?>
+    <span class="vacante-badge <?= $badge['class']; ?>">
+        <i class="fas <?= $badge['icon']; ?> me-1"></i>
+        <?= $badge['text']; ?>
+    </span>
+<?php endif; ?>
+
                 </div>
+
+                
 
                 <div class="vacante-info">
                     <div class="info-item">
