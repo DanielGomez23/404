@@ -2,6 +2,7 @@ create DATABASE project_db-- Tabla de postulantes
 -- Tabla de postulantes
 -- Crear la base de datos si no existe
 CREATE DATABASE IF NOT EXISTS project_db;
+USE project_db;
 
 -- Tabla de postulantes
 CREATE TABLE IF NOT EXISTS postulante (
