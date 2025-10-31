@@ -72,8 +72,10 @@ $vacanteController->eliminarVacante();
         </span>
     <?php endif; ?>
 
-    <form method="POST" action="calif_vacantes.php">
+    <form method="POST" action="../../controllers/vacanteController.php">
+    <input type="hidden" name="accion" value="actualizarCalificacion">
     <input type="hidden" name="vacante_id" value="<?= $vacante['id']; ?>">
+
     <select name="calificacion" class="form-select form-select-sm" onchange="this.form.submit()">
         <option value="normal" <?= $vacante['calificacion'] == 'normal' ? 'selected' : ''; ?>>Normal</option>
         <option value="buena" <?= $vacante['calificacion'] == 'buena' ? 'selected' : ''; ?>>Buena</option>
@@ -81,6 +83,8 @@ $vacanteController->eliminarVacante();
         <option value="destacada" <?= $vacante['calificacion'] == 'destacada' ? 'selected' : ''; ?>>Destacada</option>
     </select>
 </form>
+
+
 
 </div>
  <div class="vacante-info">
@@ -111,11 +115,6 @@ $vacanteController->eliminarVacante();
                                 <i class="fas fa-calendar-alt me-2"></i>
                                 Publicado el <?= date("d/m/Y", strtotime($vacante['fecha_publicacion'])); ?>
                             </span>
-                            <div class="d-flex gap-2">
-                                <a href="ValorTin".php?id=<?= $vacante['id']; ?>" class="btn btn-outline-info btn-sm">
-                                    <i class="fas fa-eye me-1"></i> Valor agregado
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>

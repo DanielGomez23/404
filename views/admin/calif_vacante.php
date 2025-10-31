@@ -2,44 +2,31 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once '../../config/database.php';
+require_once '../../config/Database.php';
+require_once '../../models/vacante.php';
+require_once '../../controllers/Alertas.php'; // si ya tienes la clase Alerta
 
-// Verificar que sea administrador
-if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != 'administrador') {
+$conn = Database::getConnection();
+
+if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../login.php");
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['vacante_id']) && isset($_POST['calificacion'])) {
-        $vacante_id = intval($_POST['vacante_id']);
-        $calificacion = $_POST['calificacion'];
-        
-        // Validar que la calificación sea válida
-        $calificaciones_validas = ['normal', 'buena', 'recomendada', 'destacada'];
-        
-        if (in_array($calificacion, $calificaciones_validas)) {
-            $query = "UPDATE ofertas_trabajo SET calificacion = ? WHERE id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("si", $calificacion, $vacante_id);
-            
-            if ($stmt->execute()) {
-                $_SESSION['mensaje_exito'] = "Calificación actualizada correctamente";
-            } else {
-                $_SESSION['mensaje_error'] = "Error al actualizar la calificación: " . $conn->error;
-            }
-            $stmt->close();
-        } else {
-            $_SESSION['mensaje_error'] = "Calificación no válida";
-        }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vacante_id'], $_POST['calificacion'])) {
+    $idVacante = (int) $_POST['vacante_id'];
+    $nuevaCalificacion = trim($_POST['calificacion']);
+    $idReclutador = (int) $_SESSION['usuario_id'];
+
+    $vacante = new Vacante($conn);
+    if ($vacante->actualizarCalificacion($idVacante, $idReclutador, $nuevaCalificacion)) {
+        header("Location: dash_reclutadores.php");
+        exit;
     } else {
-        $_SESSION['mensaje_error'] = "Datos incompletos";
+        echo "<div style='color:red;text-align:center;margin-top:20px;'>Error al actualizar la calificación.</div>";
     }
 } else {
-    $_SESSION['mensaje_error'] = "Método no permitido";
+    header("Location: dash_reclutadores.php");
+    exit;
 }
-
-// Redirigir de vuelta a la lista de vacantes
-header("Location: listar_vacantes.php");
-exit;
 ?>

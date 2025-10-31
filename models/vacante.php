@@ -57,5 +57,16 @@ class Vacante {
 }
 
 
+
+public function actualizarCalificacion($idVacante, $calificacion)
+{
+    $sql = "UPDATE ofertas_trabajo SET calificacion = ? WHERE id = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("si", $calificacion, $idVacante);
+    return $stmt->execute();
+}
+
+
+
 }
 ?>

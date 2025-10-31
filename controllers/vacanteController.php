@@ -128,6 +128,29 @@ class VacanteController {
                 }
             }
         }
+
+
+        public function actualizarCalificacion()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vacante_id'], $_POST['calificacion'])) {
+        $idVacante = intval($_POST['vacante_id']);
+        $calificacion = $_POST['calificacion'];
+
+        $permitidas = ['normal', 'buena', 'recomendada', 'destacada'];
+
+        if (!in_array($calificacion, $permitidas)) {
+            echo "<script>alert('Calificación no válida'); history.back();</script>";
+            exit;
+        }
+
+        if ($this->vacante->actualizarCalificacion($idVacante, $calificacion)) {
+            echo "<script>alert('Calificación actualizada correctamente'); window.location.href='../views/admin/vacantes.php';</script>";
+        } else {
+            echo "<script>alert('Error al actualizar la calificación'); history.back();</script>";
+        }
+    }
+}
+
         
     }
         
@@ -156,6 +179,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
             break;
     }
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
+    $vacanteController = new VacanteController();
+
+    if ($_POST['accion'] === 'actualizarCalificacion') {
+        $vacanteController->actualizarCalificacion();
+    }
+}
+
 
 
 ?>

@@ -2,7 +2,6 @@ create DATABASE project_db-- Tabla de postulantes
 -- Tabla de postulantes
 -- Crear la base de datos si no existe
 CREATE DATABASE IF NOT EXISTS project_db;
-USE project_db;
 
 -- Tabla de postulantes
 CREATE TABLE IF NOT EXISTS postulante (
@@ -69,7 +68,6 @@ CREATE TABLE IF NOT EXISTS postulaciones (
 
 --------------------------------------------------
 -- Esto es de Brahiam, Rolando cuando organice la base de datos intente ingresar esto de postulacion para que funcione 
-USE project_db;
 DROP TABLE IF EXISTS postulaciones;
 
 CREATE TABLE postulaciones (
@@ -85,19 +83,22 @@ CREATE TABLE postulaciones (
 --Todo esto es para que no de error al agregar nuevas columnas para el funcionamiento de la pagina
 
 -- Agregar columna de nivel de experiencia a la tabla ofertas_trabajo para que no de error
-USE project_db;
 ALTER TABLE ofertas_trabajo
 ADD COLUMN modalidad VARCHAR(50) DEFAULT 'No definida',
 ADD COLUMN nivel VARCHAR(50) DEFAULT 'No indicado';
 
 
-USE project_db;
 
 ALTER TABLE postulaciones
 ADD COLUMN estado ENUM('enviada', 'vista', 'rechazada', 'aceptada') DEFAULT 'enviada' AFTER fecha_postulacion;
-USE project_db;
 
 ALTER TABLE postulaciones
 ADD COLUMN id_oferta INT NOT NULL AFTER id;
 
 -- Agregar columna estado a la tabla postulaciones
+
+
+
+
+ALTER TABLE ofertas_trabajo
+ADD COLUMN calificacion ENUM('normal', 'buena', 'recomendada', 'destacada') DEFAULT 'normal';
