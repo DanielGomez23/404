@@ -146,4 +146,3 @@ $vacantes = $usuarioModel->obtenerVacantes();
 </div>
 </body>
 </html>
-

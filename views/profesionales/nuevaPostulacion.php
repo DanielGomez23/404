@@ -36,54 +36,27 @@ if (!isset($_SESSION['cedula']) || $_SESSION['usuario_rol'] !== 'postulante') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Postularse</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        label {
-            font-weight: bold;
-            color: #444;
-        }
-        input, textarea {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            width: 100%;
-        }
-        input[type="submit"] {
-            background-color: #667eea;
-            color: white;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #5a6fd6;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    link
+    
 </head>
 <body>
+    <div class="main-container">
+        <!-- Panel Izquierdo -->
+        <div class="left-panel">
+            <div class="brand-content">
+                <h1 class="brand-title">Antioquia-unida</h1>
+                <h2 class="brand-subtitle">¡Bienvenido de nuevo!</h2>
+                <p class="brand-description">
+                    Inicia sesión y continúa construyendo tu futuro profesional con nosotros.
+                </p>
+                <a href="registro.php" class="register-link-btn">
+                    ¿No tienes cuenta? Regístrate
+                </a>
+            </div>
+        </div>
+
     <div class="container">
         <h2>Formulario de Postulación</h2>
 
