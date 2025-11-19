@@ -37,7 +37,10 @@ $vacanteController->eliminarVacante();
 </head>
 <body>
 
-    <?php include_once '../header.php'; ?>
+   <?php
+$rol_usuario = "Empresa"; 
+include_once '../header.php';
+?>
 
     <div class="container my-4">
         <h1 class="text-center mb-4">Mis Vacantes Publicadas</h1>
@@ -76,14 +79,11 @@ $vacanteController->eliminarVacante();
                                 <i class="fas fa-dollar-sign"></i>
                                 <span><?= htmlspecialchars($vacante['salario_min']); ?> - <?= htmlspecialchars($vacante['salario_max']); ?></span>
                             </div>
-                            <div class="info-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span><?= htmlspecialchars($vacante['nivel']); ?></span>
-                            </div>
+                           
                         </div>
 
                         <p class="vacante-description">
-                            <?= htmlspecialchars($vacante['descripcion']); ?>
+                            <?= htmlspecialchars($vacante['requisitos']); ?>
                         </p>
 
                         <div class="vacante-footer">

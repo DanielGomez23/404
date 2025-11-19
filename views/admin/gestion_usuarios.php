@@ -29,11 +29,14 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
 </head>
 <body>
 
-
+  <?php
+$rol_usuario = "Admin"; 
+include_once '../header.php';
+?>
 
 
     <div class="container">
-        <div class="main-content">
+        <div class="main-content fade-in">
             
             <!-- Título de la sección -->
             <h2 class="section-title">
@@ -42,23 +45,23 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
 
             <!-- Cards de estadísticas -->
             <div class="stats-cards">
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="stat-number"><?= count($usuarios) ?></div>
                     <div>Total Usuarios</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="stat-number">
                         <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'administrador'; })) ?>
                     </div>
                     <div>Administradores</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="stat-number">
                         <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'postulante'; })) ?>
                     </div>
                     <div>Profesionales</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="stat-number">
                         <?= count(array_filter($usuarios, function($u) { return $u['rol'] === 'reclutador'; })) ?>
                     </div>
@@ -67,7 +70,7 @@ $usuarios = $usuarioModel->obtenerTodosUsuarios();
             </div>
 
             <!-- Tabla de usuarios -->
-            <div class="table-container">
+            <div class="table-container fade-in">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>

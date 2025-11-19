@@ -32,7 +32,8 @@ class VacanteController {
         // Solo procesar si viene del formulario correcto
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['postulacion'])) {
 
-            // Verificar que el usuario esté logueado y sea reclutador
+
+            /* Verificar que el usuario esté logueado y sea reclutador
             if (!isset($_SESSION['usuario_rol']) || $_SESSION['usuario_rol'] !== 'reclutador') {
                 $this->alerta->mostrarAlerta(
                     "error",
@@ -42,6 +43,7 @@ class VacanteController {
                 );
                 return;
             }
+                */
 
             // Obtener el id del reclutador desde la sesión (ajustado)
             if (!isset($_SESSION['usuario_id']) || empty($_SESSION['usuario_id'])) {

@@ -13,7 +13,10 @@
 </head>
 <body>
     <!-- Header Administrativo -->
-    <?php include_once '../header.php'; ?>
+<?php
+$rol_usuario = "Empresa"; 
+include_once '../header.php';
+?>
 
     <!-- Encabezado Admin -->
     <section class="admin-hero">

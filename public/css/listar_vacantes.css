@@ -315,6 +315,7 @@ body {
         transition: all 0.3s ease;
         text-decoration: none;
         display: inline-block;
+        
     }
 
     .btn-aplicar:hover {
@@ -326,14 +327,14 @@ body {
     .btn-ver-mas {
         background: transparent;
         color: #4A90E2;
-        border: 2px solid #4A90E2;
+        border: 9px solid #4A90E2;
         padding: 0.8rem 2rem;
         border-radius: 12px;
         font-weight: 600;
         transition: all 0.3s ease;
         text-decoration: none;
         display: inline-block;
-        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .btn-ver-mas:hover {

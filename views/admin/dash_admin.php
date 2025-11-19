@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="../../public/css/footer.css">
 </head>
 <body>
-    <?php include_once '../header.php'; ?>
+   <?php
+$rol_usuario = "Admin"; 
+include_once '../header.php';
+?>
 
     <!-- Encabezado Admin -->
     <section class="admin-hero">
@@ -86,7 +89,7 @@
                     </div>
                     <h3 class="card-title">Vacantes</h3>
                     <p class="card-description">
-                        Califica vacantes
+                        Califica vacantes: permite al administrador evaluar y asignar una calificación a cada vacante publicada, con el fin de garantizar su confiabilidad.
                     </p>
                     <a href="vacantes.php" class="card-action">
                         <i class="fas fa-briefcase me-2"></i>

@@ -3,11 +3,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once '../../controllers/vacanteController.php';
+require_once '../../models/usuarios.php';
+
 
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../login.php");
     exit;
 }
+
+
 
 $query = "SELECT * FROM ofertas_trabajo ORDER BY fecha_publicacion DESC";
 $stmt = $conn->prepare($query);
@@ -17,6 +21,7 @@ $vacantes = $result->fetch_all(MYSQLI_ASSOC);
 
 $vacanteController = new VacanteController();
 $vacanteController->eliminarVacante();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +37,10 @@ $vacanteController->eliminarVacante();
 </head>
 <body>
 
-    <?php include_once '../header.php'; ?>
+     <?php
+$rol_usuario = "Admin"; 
+include_once '../header.php';
+?>
 
     <div class="container my-4">
         <h1 class="text-center mb-4">Mis Vacantes Publicadas</h1>
@@ -92,18 +100,12 @@ $vacanteController->eliminarVacante();
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span><?= htmlspecialchars($vacante['ubicacion']); ?></span>
                             </div>
-                            <div class="info-item">
-                                <i class="fas fa-clock"></i>
-                                <span><?= htmlspecialchars($vacante['modalidad']); ?></span>
-                            </div>
+                           
                             <div class="info-item">
                                 <i class="fas fa-dollar-sign"></i>
                                 <span><?= htmlspecialchars($vacante['salario_min']); ?> - <?= htmlspecialchars($vacante['salario_max']); ?></span>
                             </div>
-                            <div class="info-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span><?= htmlspecialchars($vacante['nivel']); ?></span>
-                            </div>
+                           
                         </div>
 
                         <p class="vacante-description">

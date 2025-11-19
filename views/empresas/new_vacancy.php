@@ -19,7 +19,10 @@ session_start();
 
 </head>
 <body>
-    <?php include_once '../header.php'; ?>
+    <?php
+$rol_usuario = "Empresa"; 
+include_once '../header.php';
+?>
 
     <!-- Encabezado Hero -->
     <section class="admin-hero">

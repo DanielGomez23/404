@@ -17,7 +17,7 @@
                 <div class="navbar-brand">
                     <i class="fas fa-shield-alt me-2"></i>
                     Antioquia-Unida
-                    <span class="admin-badge">profesional</span>
+<span class="admin-badge"><?php echo $rol_usuario ?? 'usuario'; ?></span>
                 </div>
                 
                 <div class="d-flex align-items-center">

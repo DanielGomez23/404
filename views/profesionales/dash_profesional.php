@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="../../public/css/footer.css">
 </head>
 <body>
-    <?php include_once '../header.php';?>
+    <?php
+$rol_usuario = "Profesional"; 
+include_once '../header.php';
+?>
 
     <!-- Encabezado Admin -->
     <section class="admin-hero">
